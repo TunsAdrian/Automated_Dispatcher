@@ -28,8 +28,8 @@ namespace AutomatedDispatcher.Data
         {
             if (!optionsBuilder.IsConfigured)
             {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer("Server=idostuff.xyz,1433;Database=webapp;user id=webappAdmin;password=ChangeM3Now!234;");
+                // TODO: keep in mind that maybe this will be needed in the future
+                //optionsBuilder.UseSqlServer("Server=idostuff.xyz,1433;Database=webapp;user id=webappAdmin;password=ChangeM3Now!234;");
             }
         }
 

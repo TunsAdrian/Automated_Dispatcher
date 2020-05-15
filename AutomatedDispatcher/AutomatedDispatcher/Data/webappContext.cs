@@ -29,7 +29,7 @@ namespace AutomatedDispatcher.Data
             if (!optionsBuilder.IsConfigured)
             {
                 // TODO: keep in mind that maybe this will be needed in the future
-                //optionsBuilder.UseSqlServer("Server=idostuff.xyz,1433;Database=webapp;user id=webappAdmin;password=ChangeM3Now!234;");
+                optionsBuilder.UseSqlServer("Server=idostuff.xyz,1433;Database=webapp;user id=webappAdmin;password=ChangeM3Now!234;");
             }
         }
 

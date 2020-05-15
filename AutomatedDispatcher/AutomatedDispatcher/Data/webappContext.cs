@@ -23,13 +23,14 @@ namespace AutomatedDispatcher.Data
         public virtual DbSet<TaskSkill> TaskSkill { get; set; }
 
         public DbSet<Skill> Skills { get; set; }
+        public DbSet<Task> Tasks { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
                 // TODO: keep in mind that maybe this will be needed in the future
-                //optionsBuilder.UseSqlServer("Server=idostuff.xyz,1433;Database=webapp;user id=webappAdmin;password=ChangeM3Now!234;");
+                optionsBuilder.UseSqlServer("Server=idostuff.xyz,1433;Database=webapp;user id=webappAdmin;password=ChangeM3Now!234;");
             }
         }
 

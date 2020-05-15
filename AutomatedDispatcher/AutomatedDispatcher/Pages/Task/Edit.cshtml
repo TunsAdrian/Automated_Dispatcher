@@ -1,0 +1,70 @@
+﻿@page
+@model AutomatedDispatcher.Pages.Task.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Task</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Task.Id" />
+            <div class="form-group">
+                <label asp-for="Task.EmployeeId" class="control-label"></label>
+                <select asp-for="Task.EmployeeId" class="form-control" asp-items="ViewBag.EmployeeId"></select>
+                <span asp-validation-for="Task.EmployeeId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Task.Name" class="control-label"></label>
+                <input asp-for="Task.Name" class="form-control" />
+                <span asp-validation-for="Task.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Task.StatusId" class="control-label"></label>
+                <select asp-for="Task.StatusId" class="form-control" asp-items="ViewBag.StatusId"></select>
+                <span asp-validation-for="Task.StatusId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Task.Description" class="control-label"></label>
+                <input asp-for="Task.Description" class="form-control" />
+                <span asp-validation-for="Task.Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Task.Priority" class="control-label"></label>
+                <input asp-for="Task.Priority" class="form-control" />
+                <span asp-validation-for="Task.Priority" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Task.ExpectedTime" class="control-label"></label>
+                <input asp-for="Task.ExpectedTime" class="form-control" />
+                <span asp-validation-for="Task.ExpectedTime" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Task.StartDate" class="control-label"></label>
+                <input asp-for="Task.StartDate" class="form-control" />
+                <span asp-validation-for="Task.StartDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Task.EndDate" class="control-label"></label>
+                <input asp-for="Task.EndDate" class="form-control" />
+                <span asp-validation-for="Task.EndDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

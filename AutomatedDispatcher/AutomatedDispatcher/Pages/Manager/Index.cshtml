@@ -1,0 +1,49 @@
+﻿@page
+@model AutomatedDispatcher.Pages.Manager.IndexModel
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Pages/Shared/_LayoutManager.cshtml";
+}
+<head>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
+</head>
+
+<h1>Meniu Manager</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table id="tableTaskManager" class="table table-striped table-bordered table-sm " cellspacing="0"
+       width="100%">
+    <thead>
+        <tr>
+
+            <th scope="col">Name</th>
+            <th scope="col">Status</th>
+            <th scope="col">Priority</th>
+            <th scope="col">Expected Time</th>
+            <th scope="col">Start Date</th>
+            <th scope="col">End Date</th>
+            <th class="no-sort" scope="col">Options</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var task in Model.TaskList)
+        {
+            <tr>
+                <td>@task.Name</td>
+                <td>@task.Status</td>
+                <td>@task.Priority</td>
+                <td>@task.ExpectedTime</td>
+                <td>@task.StartDate</td>
+                <td>@task.EndDate</td>
+
+                <td>
+                    <a asp-page="./EditTask" asp-route-id="@task.Id">Edit</a> |
+                    <a asp-page="./DetailsTask" asp-route-id="@task.Id">Details</a> |
+                    <a asp-page="./DeleteTask" asp-route-id="@task.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

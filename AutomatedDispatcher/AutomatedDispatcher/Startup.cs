@@ -11,6 +11,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
+using AutomatedDispatcher.Repositories.Interfaces;
+using AutomatedDispatcher.Repositories.Implementations;
 
 namespace AutomatedDispatcher
 {
@@ -27,9 +29,13 @@ namespace AutomatedDispatcher
         public void ConfigureServices(IServiceCollection services)
         {
             // Added repository dependency
+            services.AddScoped<webappContext, webappContext>(); // not sure if entirely correct here, but it works
+
             services.AddScoped<ISkillRepository, SkillRepository>();
+            services.AddScoped<ITaskRepository, TaskRepository>();
+
             // Added real database dependecy
-            services.AddDbContext<webappContext>(c =>c.UseSqlServer(Configuration.GetConnectionString("webappContext")));
+            // services.AddDbContext<webappContext>(c =>c.UseSqlServer(Configuration.GetConnectionString("webappContext")));
 
             services.AddRazorPages();
         }

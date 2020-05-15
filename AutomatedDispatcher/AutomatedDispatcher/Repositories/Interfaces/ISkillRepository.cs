@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AutomatedDispatcher.Repositories
 {
-    interface ISkillRepository
+    public interface ISkillRepository
     {
         Task<IEnumerable<Skill>> GetSkillsListAsync();
         Task<Skill> GetSkillByIdAsync(int id);

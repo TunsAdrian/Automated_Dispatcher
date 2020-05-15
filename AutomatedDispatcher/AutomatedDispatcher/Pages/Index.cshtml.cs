@@ -26,6 +26,8 @@ namespace AutomatedDispatcher.Pages
         public string Password { get; set; }
 
         public string Msg { get; set; }
+
+
         public void OnGet()
         {
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using AutomatedDispatcher.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
@@ -31,6 +32,13 @@ namespace AutomatedDispatcher.Pages
 
         public IActionResult OnPost()
         {
+            webappContext context = new webappContext();
+
+
+           /* var login = from employee in context.Employee
+                        where employee.Username.Equals(Username) == true && employee.Password.Equals(Password) == true
+                        select employee; */
+
             if (ModelState.IsValid == false)
             {
                 return Page();

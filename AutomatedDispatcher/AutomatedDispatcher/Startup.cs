@@ -32,9 +32,9 @@ namespace AutomatedDispatcher
             // Added real database dependecy
             // services.AddDbContext<webappContext>(c =>c.UseSqlServer(Configuration.GetConnectionString("webappContext")));
 
-            services.AddDistributedMemoryCache(); // memory is configured for cache
-
             services.AddSession();
+
+            services.AddMemoryCache(); // memory is configured for cache
 
             services.AddRazorPages();
         }

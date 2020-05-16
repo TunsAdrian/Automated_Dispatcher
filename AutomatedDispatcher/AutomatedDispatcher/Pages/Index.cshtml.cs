@@ -56,10 +56,10 @@ namespace AutomatedDispatcher.Pages
                 {
                     if (i.Role == 0)
                     {
-                        return RedirectToPage("/Manager/meniuManager");
+                        return RedirectToPage("/Manager/menuManager");
                     } else if (i.Role  == 1)
                     {
-                        return RedirectToPage("/Programmer/meniuProgrammer");
+                        return RedirectToPage("/Programmer/menuProgrammer");
                     } 
 
                 }

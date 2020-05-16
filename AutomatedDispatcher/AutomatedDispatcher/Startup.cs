@@ -1,18 +1,12 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using AutomatedDispatcher.Data;
 using AutomatedDispatcher.Repositories;
+using AutomatedDispatcher.Repositories.Implementations;
+using AutomatedDispatcher.Repositories.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.EntityFrameworkCore;
-using AutomatedDispatcher.Repositories.Interfaces;
-using AutomatedDispatcher.Repositories.Implementations;
 
 namespace AutomatedDispatcher
 {
@@ -33,6 +27,7 @@ namespace AutomatedDispatcher
 
             services.AddScoped<ISkillRepository, SkillRepository>();
             services.AddScoped<ITaskRepository, TaskRepository>();
+            services.AddScoped<IEmployeeRepository, EmployeeRepository>();
 
             // Added real database dependecy
             // services.AddDbContext<webappContext>(c =>c.UseSqlServer(Configuration.GetConnectionString("webappContext")));

@@ -1,6 +1,4 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace AutomatedDispatcher.Data
 {
@@ -24,6 +22,7 @@ namespace AutomatedDispatcher.Data
 
         public DbSet<Skill> Skills { get; set; }
         public DbSet<Task> Tasks { get; set; }
+        public DbSet<Employee> Employees { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

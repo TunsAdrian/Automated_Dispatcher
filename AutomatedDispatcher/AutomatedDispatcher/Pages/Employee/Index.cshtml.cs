@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 
-namespace AutomatedDispatcher.Pages.Task
+namespace AutomatedDispatcher.Pages.Employee
 {
     public class IndexModel : PageModel
     {
@@ -13,17 +13,11 @@ namespace AutomatedDispatcher.Pages.Task
             _context = context;
         }
 
-        public IList<Data.Task> Task { get; set; }
+        public IList<Data.Employee> Employee { get; set; }
 
         public async System.Threading.Tasks.Task OnGetAsync()
         {
-            Task = await _context.Task.ToListAsync();
-
-            // Not sure about this piece of code. Is from the old project.
-
-            //Task = await _context.Task
-            //    .Include(t => t.Employee)
-            //    .Include(t => t.Status).ToListAsync();
+            Employee = await _context.Employee.ToListAsync();
         }
     }
 }

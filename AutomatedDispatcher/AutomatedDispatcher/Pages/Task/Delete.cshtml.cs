@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using AutomatedDispatcher.Data;
+using System.Threading.Tasks;
 
 namespace AutomatedDispatcher.Pages.Task
 {
@@ -54,7 +50,7 @@ namespace AutomatedDispatcher.Pages.Task
                 await _context.SaveChangesAsync();
             }
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("../Manager/menuManager");
         }
     }
 }

@@ -1,7 +1,5 @@
 ﻿using AutomatedDispatcher.Data;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace AutomatedDispatcher.Repositories
@@ -15,8 +13,8 @@ namespace AutomatedDispatcher.Repositories
 
         // Aici era conflict cu Task name
         System.Threading.Tasks.Task UpdateAsync(Skill product);
-        System.Threading.Tasks.Task DeleteAsync(Skill product); 
-        
+        System.Threading.Tasks.Task DeleteAsync(Skill product);
+
         // Aici nu sunt sigur daca trebuie implementat
         //Task<IEnumerable<Skill>> GetEmployees();
     }

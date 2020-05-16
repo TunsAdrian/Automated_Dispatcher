@@ -3,6 +3,7 @@
 
 @{
     ViewData["Title"] = "Create";
+    Layout = "~/Pages/Shared/_LayoutManager.cshtml";
 }
 
 <h1>Create</h1>
@@ -42,16 +43,6 @@
                 <span asp-validation-for="Task.ExpectedTime" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Task.StartDate" class="control-label"></label>
-                <input asp-for="Task.StartDate" class="form-control" />
-                <span asp-validation-for="Task.StartDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Task.EndDate" class="control-label"></label>
-                <input asp-for="Task.EndDate" class="form-control" />
-                <span asp-validation-for="Task.EndDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>
@@ -59,7 +50,7 @@
 </div>
 
 <div>
-    <a asp-page="Index">Back to List</a>
+    <a asp-page="../Manager/menuManager">Back to List</a>
 </div>
 
 @section Scripts {

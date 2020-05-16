@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
+﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using AutomatedDispatcher.Data;
+using System;
+using System.Collections.Generic;
 
 namespace AutomatedDispatcher.Pages.Skill
 {
@@ -20,7 +16,7 @@ namespace AutomatedDispatcher.Pages.Skill
 
         //public IEnumerable<Data.Skill> SkillList { get; set; } = new List<Data.Skill>();
         //[BindProperty(SupportsGet = true)]
-        public IList<Data.Skill> Skill { get;set; }
+        public IList<Data.Skill> Skill { get; set; }
 
         // TODO: Modify here
         public async System.Threading.Tasks.Task OnGetAsync()

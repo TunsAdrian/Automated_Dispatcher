@@ -1,15 +1,19 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using System.Threading.Tasks;
+using AutomatedDispatcher.Data;
 
-namespace AutomatedDispatcher.Pages.Task
+namespace AutomatedDispatcher.Pages.Programmer
 {
-    public class DetailsModel : PageModel
+    public class taskDetailsProgrammerModel : PageModel
     {
         private readonly AutomatedDispatcher.Data.webappContext _context;
 
-        public DetailsModel(AutomatedDispatcher.Data.webappContext context)
+        public taskDetailsProgrammerModel(AutomatedDispatcher.Data.webappContext context)
         {
             _context = context;
         }

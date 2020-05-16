@@ -1,10 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using System;
-using System.Threading.Tasks;
+using AutomatedDispatcher.Data;
 
-namespace AutomatedDispatcher.Pages.Task
+namespace AutomatedDispatcher.Pages.Employee
 {
     public class CreateModel : PageModel
     {
@@ -17,13 +20,11 @@ namespace AutomatedDispatcher.Pages.Task
 
         public IActionResult OnGet()
         {
-            ViewData["EmployeeId"] = new SelectList(_context.Employee, "Id", "FirstName");
-            ViewData["StatusId"] = new SelectList(_context.Status, "Id", "Id");
             return Page();
         }
 
         [BindProperty]
-        public Data.Task Task { get; set; }
+        public Data.Employee Employee { get; set; }
 
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://aka.ms/RazorPagesCRUD.
@@ -33,10 +34,8 @@ namespace AutomatedDispatcher.Pages.Task
             {
                 return Page();
             }
-            // Set StartDate to create time   
-            Task.StartDate = DateTime.Now;
 
-            _context.Task.Add(Task);
+            _context.Employee.Add(Employee);
             await _context.SaveChangesAsync();
 
             return RedirectToPage("../Manager/menuManager");

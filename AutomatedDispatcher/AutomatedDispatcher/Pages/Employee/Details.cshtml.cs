@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 
-namespace AutomatedDispatcher.Pages.Task
+namespace AutomatedDispatcher.Pages.Employee
 {
     public class DetailsModel : PageModel
     {
@@ -14,7 +14,7 @@ namespace AutomatedDispatcher.Pages.Task
             _context = context;
         }
 
-        public Data.Task Task { get; set; }
+        public Data.Employee Employee { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -23,11 +23,9 @@ namespace AutomatedDispatcher.Pages.Task
                 return NotFound();
             }
 
-            Task = await _context.Task
-                .Include(t => t.Employee)
-                .Include(t => t.Status).FirstOrDefaultAsync(m => m.Id == id);
+            Employee = await _context.Employee.FirstOrDefaultAsync(m => m.Id == id);
 
-            if (Task == null)
+            if (Employee == null)
             {
                 return NotFound();
             }

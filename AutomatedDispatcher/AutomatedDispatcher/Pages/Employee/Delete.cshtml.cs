@@ -1,10 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Threading.Tasks;
 
-namespace AutomatedDispatcher.Pages.Skill
+namespace AutomatedDispatcher.Pages.Employee
 {
     public class DeleteModel : PageModel
     {
@@ -12,11 +11,11 @@ namespace AutomatedDispatcher.Pages.Skill
 
         public DeleteModel(AutomatedDispatcher.Data.webappContext context)
         {
-            _context = context ?? throw new ArgumentNullException(nameof(context));
+            _context = context;
         }
 
         [BindProperty]
-        public Data.Skill Skill { get; set; }
+        public Data.Employee Employee { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -25,9 +24,9 @@ namespace AutomatedDispatcher.Pages.Skill
                 return NotFound();
             }
 
-            Skill = await _context.Skill.FirstOrDefaultAsync(m => m.Id == id);
+            Employee = await _context.Employee.FirstOrDefaultAsync(m => m.Id == id);
 
-            if (Skill == null)
+            if (Employee == null)
             {
                 return NotFound();
             }
@@ -41,15 +40,15 @@ namespace AutomatedDispatcher.Pages.Skill
                 return NotFound();
             }
 
-            Skill = await _context.Skill.FindAsync(id);
+            Employee = await _context.Employee.FindAsync(id);
 
-            if (Skill != null)
+            if (Employee != null)
             {
-                _context.Skill.Remove(Skill);
+                _context.Employee.Remove(Employee);
                 await _context.SaveChangesAsync();
             }
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("../Manager/menuManager");
         }
     }
 }

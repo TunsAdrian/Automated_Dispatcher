@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using AutomatedDispatcher.Data;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace AutomatedDispatcher.Pages.Task
 {
@@ -37,8 +34,8 @@ namespace AutomatedDispatcher.Pages.Task
             {
                 return NotFound();
             }
-           ViewData["EmployeeId"] = new SelectList(_context.Employee, "Id", "FirstName");
-           ViewData["StatusId"] = new SelectList(_context.Status, "Id", "Id");
+            ViewData["EmployeeId"] = new SelectList(_context.Employee, "Id", "FirstName");
+            ViewData["StatusId"] = new SelectList(_context.Status, "Id", "Id");
             return Page();
         }
 
@@ -69,7 +66,7 @@ namespace AutomatedDispatcher.Pages.Task
                 }
             }
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("../Manager/menuManager");
         }
 
         private bool TaskExists(int id)

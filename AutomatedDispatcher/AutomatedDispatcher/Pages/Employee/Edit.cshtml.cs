@@ -1,11 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace AutomatedDispatcher.Pages.Skill
+namespace AutomatedDispatcher.Pages.Employee
 {
     public class EditModel : PageModel
     {
@@ -13,11 +12,11 @@ namespace AutomatedDispatcher.Pages.Skill
 
         public EditModel(AutomatedDispatcher.Data.webappContext context)
         {
-            _context = context ?? throw new ArgumentNullException(nameof(context));
+            _context = context;
         }
 
         [BindProperty]
-        public Data.Skill Skill { get; set; }
+        public Data.Employee Employee { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -26,9 +25,9 @@ namespace AutomatedDispatcher.Pages.Skill
                 return NotFound();
             }
 
-            Skill = await _context.Skill.FirstOrDefaultAsync(m => m.Id == id);
+            Employee = await _context.Employee.FirstOrDefaultAsync(m => m.Id == id);
 
-            if (Skill == null)
+            if (Employee == null)
             {
                 return NotFound();
             }
@@ -44,7 +43,7 @@ namespace AutomatedDispatcher.Pages.Skill
                 return Page();
             }
 
-            _context.Attach(Skill).State = EntityState.Modified;
+            _context.Attach(Employee).State = EntityState.Modified;
 
             try
             {
@@ -52,7 +51,7 @@ namespace AutomatedDispatcher.Pages.Skill
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!SkillExists(Skill.Id))
+                if (!EmployeeExists(Employee.Id))
                 {
                     return NotFound();
                 }
@@ -62,12 +61,12 @@ namespace AutomatedDispatcher.Pages.Skill
                 }
             }
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("../Manager/menuManager");
         }
 
-        private bool SkillExists(int id)
+        private bool EmployeeExists(int id)
         {
-            return _context.Skill.Any(e => e.Id == id);
+            return _context.Employee.Any(e => e.Id == id);
         }
     }
 }

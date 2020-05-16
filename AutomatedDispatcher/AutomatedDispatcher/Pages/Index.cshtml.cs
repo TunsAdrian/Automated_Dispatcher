@@ -58,7 +58,7 @@ namespace AutomatedDispatcher.Pages
 
                     } else if ( i.Role  == 1 )
                     {
-                        return RedirectToPage("/Programmer/menuProgrammer", new { Logged = true });
+                        return RedirectToPage("/Programmer/menuProgrammer", new { Logged = true , Id = i.Id});
                     } 
 
                 }

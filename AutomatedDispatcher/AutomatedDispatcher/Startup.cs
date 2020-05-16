@@ -31,7 +31,7 @@ namespace AutomatedDispatcher
 
             // Added real database dependecy
             // services.AddDbContext<webappContext>(c =>c.UseSqlServer(Configuration.GetConnectionString("webappContext")));
-
+            services.AddSession();
             services.AddRazorPages();
         }
 

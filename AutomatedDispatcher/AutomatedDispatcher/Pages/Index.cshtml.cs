@@ -26,8 +26,6 @@ namespace AutomatedDispatcher.Pages
         [BindProperty, Required]
         public string Password { get; set; }
 
-        public string Msg { get; set; }
-
 
         public void OnGet()
         {
@@ -54,17 +52,19 @@ namespace AutomatedDispatcher.Pages
                 
                 foreach (var i in login)
                 {
-                    if (i.Role == 0)
+                    if ( i.Role == 0 )
                     {
-                        return RedirectToPage("/Manager/menuManager");
-                    } else if (i.Role  == 1)
+                        return RedirectToPage("/Manager/menuManager", new { Logged = true} );
+
+                    } else if ( i.Role  == 1 )
                     {
-                        return RedirectToPage("/Programmer/menuProgrammer");
+                        return RedirectToPage("/Programmer/menuProgrammer", new { Logged = true });
                     } 
 
                 }
 
                 return Page();
+
             }
         }
     }

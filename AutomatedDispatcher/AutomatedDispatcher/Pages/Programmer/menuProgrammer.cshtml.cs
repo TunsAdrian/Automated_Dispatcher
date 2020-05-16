@@ -19,10 +19,18 @@ namespace AutomatedDispatcher.Pages.Programmer
   
         }
         public IEnumerable<Data.Task> TaskList { get; set; } = new List<Data.Task>();
-        public async Task<IActionResult> OnGetAsync()
+        public async Task<IActionResult> OnGetAsync(Boolean Logged)
         {
-            TaskList = await _taskRepository.GetTaskListAsync();
-            return Page();
+            if(Logged == true )
+            {
+                TaskList = await _taskRepository.GetTaskListAsync();
+                return Page();
+            } else
+            {
+                return RedirectToPage("../Index");
+            }
+         
+            
         }
     }
 }

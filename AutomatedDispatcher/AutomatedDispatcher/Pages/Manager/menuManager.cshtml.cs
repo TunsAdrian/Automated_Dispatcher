@@ -21,11 +21,18 @@ namespace AutomatedDispatcher.Pages.Manager
 
         public IEnumerable<Data.Employee> EmployeeList { get; set; } = new List<Data.Employee>();
 
-        public async Task<IActionResult> OnGetAsync()
+        public async Task<IActionResult> OnGetAsync(Boolean logged)
         {
-            TaskList = await _taskRepository.GetTaskListAsync();
-            EmployeeList = await _employeeRepository.GetProgrammersListAsync();
-            return Page();
+            if (logged == true) { 
+                TaskList = await _taskRepository.GetTaskListAsync();
+                EmployeeList = await _employeeRepository.GetProgrammersListAsync();
+                return Page();
+            }
+            else
+            {
+                return RedirectToPage("../Index");
+            }
+           
         }
     }
 }

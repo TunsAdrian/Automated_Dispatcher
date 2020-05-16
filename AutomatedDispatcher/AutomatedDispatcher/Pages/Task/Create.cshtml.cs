@@ -33,6 +33,10 @@ namespace AutomatedDispatcher.Pages.Task
             {
                 return Page();
             }
+
+            // When a task is created it should not be assigned to anyone
+            Task.EmployeeId = null;
+
             // Set StartDate to create time   
             Task.StartDate = DateTime.Now;
 

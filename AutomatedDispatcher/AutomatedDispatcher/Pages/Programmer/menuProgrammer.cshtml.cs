@@ -24,13 +24,15 @@ namespace AutomatedDispatcher.Pages.Programmer
         public IEnumerable<Data.Task> TaskList { get; set; } = new List<Data.Task>();
         public async Task<IActionResult> OnGetAsync(Boolean Logged)
         {
-            if(Logged == true )
-            {
-                Username = HttpContext.Session.GetString("username");
 
+            Username = HttpContext.Session.GetString("username");
+
+            if (Username.Equals(null) == false)
+            {
                 TaskList = await _taskRepository.GetTaskListAsync();
                 return Page();
             } else
+
             {
                 return RedirectToPage("../Index");
             }

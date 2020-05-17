@@ -24,12 +24,13 @@ namespace AutomatedDispatcher.Pages.Manager
 
         public IEnumerable<Data.Employee> EmployeeList { get; set; } = new List<Data.Employee>();
 
-        public async Task<IActionResult> OnGetAsync(Boolean logged)
+        public async Task<IActionResult> OnGetAsync()
         {
-            if (logged == true) 
-            {
-                Username = HttpContext.Session.GetString("username"); // establish session
+            Username = HttpContext.Session.GetString("username"); // establish session
 
+            if (Username.Equals(null) == false ) 
+            {
+               
                 TaskList = await _taskRepository.GetTaskListAsync();
                 EmployeeList = await _employeeRepository.GetProgrammersListAsync();
                 return Page();

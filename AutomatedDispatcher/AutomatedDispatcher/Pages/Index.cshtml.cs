@@ -48,24 +48,25 @@ namespace AutomatedDispatcher.Pages
             }
             else
             {
-                //return RedirectToPage("/Manager/meniuManager");
+                //   return RedirectToPage("/Manager/menuManager", new { Logged = true} );
 
-                
+
                 foreach (var i in login)
                 {
-                    if ( i.Role == 0 )
+                    if (i.Role == 0)
                     {
                         HttpContext.Session.SetString("username", Username);
-                        return RedirectToPage("/Manager/menuManager", new { Logged = true} );
+                        return RedirectToPage("/Manager/menuManager");
 
-                    } else if ( i.Role  == 1 )
+
+                    }
+                    else if (i.Role == 1)
                     {
                         HttpContext.Session.SetString("username", Username);
-                        return RedirectToPage("/Programmer/menuProgrammer", new { Logged = true });
-                    } 
+                        return RedirectToPage("/Programmer/menuProgrammer");
+                    }
 
                 }
-
 
                 return Page();
 

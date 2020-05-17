@@ -61,7 +61,7 @@ namespace AutomatedDispatcher.Pages
                     } else if ( i.Role  == 1 )
                     {
                         HttpContext.Session.SetString("username", Username);
-                        return RedirectToPage("/Programmer/menuProgrammer", new { Logged = true , Id = i.Id});
+                        return RedirectToPage("/Programmer/menuProgrammer", new { Logged = true });
                     } 
 
                 }

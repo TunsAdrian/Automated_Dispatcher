@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutomatedDispatcher.Repositories.Interfaces;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -12,6 +13,8 @@ namespace AutomatedDispatcher.Pages.Programmer
     {
         private readonly ITaskRepository _taskRepository;
         private readonly IEmployeeRepository _employeeRepository;
+
+        public string Username { get; set; } // used for session
 
         public menuProgrammerModel(ITaskRepository taskRepository)
         {
@@ -23,6 +26,8 @@ namespace AutomatedDispatcher.Pages.Programmer
         {
             if(Logged == true )
             {
+                Username = HttpContext.Session.GetString("username");
+
                 TaskList = await _taskRepository.GetTaskListAsync();
                 return Page();
             } else
@@ -32,5 +37,12 @@ namespace AutomatedDispatcher.Pages.Programmer
          
             
         }
+
+        public IActionResult OnGetLogout()
+        {
+            HttpContext.Session.Remove("username");
+            return RedirectToPage("../Index");
+        }
+
     }
 }

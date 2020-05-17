@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using AutomatedDispatcher.Data;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
@@ -54,14 +55,17 @@ namespace AutomatedDispatcher.Pages
                 {
                     if ( i.Role == 0 )
                     {
+                        HttpContext.Session.SetString("username", Username);
                         return RedirectToPage("/Manager/menuManager", new { Logged = true} );
 
                     } else if ( i.Role  == 1 )
                     {
+                        HttpContext.Session.SetString("username", Username);
                         return RedirectToPage("/Programmer/menuProgrammer", new { Logged = true , Id = i.Id});
                     } 
 
                 }
+
 
                 return Page();
 

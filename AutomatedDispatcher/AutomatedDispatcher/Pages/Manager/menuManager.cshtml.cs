@@ -1,4 +1,5 @@
 using AutomatedDispatcher.Repositories.Interfaces;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System;
@@ -12,6 +13,8 @@ namespace AutomatedDispatcher.Pages.Manager
         private readonly ITaskRepository _taskRepository;
         private readonly IEmployeeRepository _employeeRepository;
 
+        public string Username { get; set; } // used for session
+        
         public menuManagerModel(ITaskRepository taskRepository, IEmployeeRepository employeeRepository)
         {
             _taskRepository = taskRepository ?? throw new ArgumentNullException(nameof(taskRepository));
@@ -23,16 +26,26 @@ namespace AutomatedDispatcher.Pages.Manager
 
         public async Task<IActionResult> OnGetAsync(Boolean logged)
         {
-            if (logged == true) { 
+            if (logged == true) 
+            {
+                Username = HttpContext.Session.GetString("username"); // establish session
+
                 TaskList = await _taskRepository.GetTaskListAsync();
                 EmployeeList = await _employeeRepository.GetProgrammersListAsync();
                 return Page();
+
             }
             else
             {
                 return RedirectToPage("../Index");
             }
            
+        }
+
+        public IActionResult OnGetLogout()
+        {
+            HttpContext.Session.Remove("username");
+            return RedirectToPage("../Index");
         }
     }
 }

@@ -20,9 +20,7 @@ namespace AutomatedDispatcher.Pages
         }
 
         [Required, BindProperty]
-        public string Username { get; set; }
-        [BindProperty, Required]
-        public string Password { get; set; }
+        public AutomatedDispatcher.Data.Employee user { get; set; }
 
 
         public void OnGet()
@@ -36,7 +34,7 @@ namespace AutomatedDispatcher.Pages
 
 
             var login = from employee in context.Employee
-                        where employee.Username.Equals(Username) == true && employee.Password.Equals(Password) == true
+                        where employee.Username.Equals(user.Username) == true && employee.Password.Equals(user.Password) == true
                         select employee; 
 
             if (ModelState.IsValid == false)
@@ -52,14 +50,14 @@ namespace AutomatedDispatcher.Pages
                 {
                     if (i.Role == 0)
                     {
-                        HttpContext.Session.SetString("username", Username);
+                        HttpContext.Session.SetString("username", user.Username);
                         return RedirectToPage("/Manager/menuManager");
 
 
                     }
                     else if (i.Role == 1)
                     {
-                        HttpContext.Session.SetString("username", Username);
+                        HttpContext.Session.SetString("username", user.Username);
                         return RedirectToPage("/Programmer/menuProgrammer");
                     }
 

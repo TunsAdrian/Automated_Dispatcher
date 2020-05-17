@@ -30,7 +30,7 @@ namespace AutomatedDispatcher.Pages
 
         public void OnGet()
         {
-
+            
         }
 
         public IActionResult OnPost()

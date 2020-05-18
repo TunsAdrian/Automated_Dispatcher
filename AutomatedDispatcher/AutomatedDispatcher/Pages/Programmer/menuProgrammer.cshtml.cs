@@ -27,7 +27,7 @@ namespace AutomatedDispatcher.Pages.Programmer
 
             Username = HttpContext.Session.GetString("username");
 
-            if (Username.Equals(null) == false)
+            if (Username != null)
             {
                 TaskList = await _taskRepository.GetTaskListAsync();
                 return Page();

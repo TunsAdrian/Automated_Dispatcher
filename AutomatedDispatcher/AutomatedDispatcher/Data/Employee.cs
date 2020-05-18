@@ -20,6 +20,7 @@ namespace AutomatedDispatcher.Data
         public string LastName { get; set; }
 
         [Required]
+        [Range(0, 1, ErrorMessage = "Role can be either 0 for manager or 1 for employee")]
         public short Role { get; set; }
 
         [RegularExpression(@"^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$", ErrorMessage = "The field Username should match the form example@domain.com")]

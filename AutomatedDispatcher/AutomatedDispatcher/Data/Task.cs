@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 
 namespace AutomatedDispatcher.Data
 {
@@ -13,16 +12,10 @@ namespace AutomatedDispatcher.Data
 
         public int Id { get; set; }
         public int? EmployeeId { get; set; }
-
-        [Required]
         public string Name { get; set; }
         public int? StatusId { get; set; }
         public string Description { get; set; }
-
-        [Required]
         public int Priority { get; set; }
-
-        [Required]
         public int ExpectedTime { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime? EndDate { get; set; }

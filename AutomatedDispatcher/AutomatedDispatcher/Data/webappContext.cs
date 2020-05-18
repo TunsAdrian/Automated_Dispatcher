@@ -30,10 +30,6 @@ namespace AutomatedDispatcher.Data
             {
                 // TODO: keep in mind that maybe this will be needed in the future
                 optionsBuilder.UseSqlServer("Server=idostuff.xyz,1433;Database=webapp;user id=webappAdmin;password=ChangeM3Now!234;");
-
-
-                // Connection strings for local databases
-                //optionsBuilder.UseSqlServer("Server=LAPTOP-ADI,1433;Database=Dispatcher;Trusted_Connection=True;""); // Adi
             }
         }
 

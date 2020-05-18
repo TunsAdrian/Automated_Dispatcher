@@ -21,7 +21,7 @@ namespace AutomatedDispatcher.Pages.Employee
             if (id == null)
             {
                 return NotFound();
-            } 
+            }
 
             Employee = await _context.Employee.FirstOrDefaultAsync(m => m.Id == id);
 

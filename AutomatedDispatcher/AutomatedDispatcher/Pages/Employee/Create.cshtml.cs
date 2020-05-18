@@ -37,6 +37,7 @@ namespace AutomatedDispatcher.Pages.Employee
 
             // Set iniital current workload to 0
             Employee.CurrentWorkload = 0;
+
             _context.Employee.Add(Employee);
             await _context.SaveChangesAsync();
 

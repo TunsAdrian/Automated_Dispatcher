@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace AutomatedDispatcher.Data
 {
@@ -11,11 +12,24 @@ namespace AutomatedDispatcher.Data
         }
 
         public int Id { get; set; }
+
+        [Required]
         public string FirstName { get; set; }
+
+        [Required]
         public string LastName { get; set; }
+
+        [Required]
         public short Role { get; set; }
+
+        [RegularExpression(@"^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$", ErrorMessage = "The field Username should match the form example@domain.com")]
+        [Required]
         public string Username { get; set; }
+
+        [Required]
         public string Password { get; set; }
+
+        [Required]
         public int WorkingHours { get; set; }
         public int? CurrentWorkload { get; set; }
 

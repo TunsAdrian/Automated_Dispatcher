@@ -28,7 +28,7 @@ namespace AutomatedDispatcher.Pages.Manager
         {
             Username = HttpContext.Session.GetString("username"); // establish session
 
-            if (Username.Equals(null) == false ) 
+            if (Username != null) 
             {
                
                 TaskList = await _taskRepository.GetTaskListAsync();

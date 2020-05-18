@@ -6,12 +6,15 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using AutomatedDispatcher.Data;
+using Microsoft.AspNetCore.Http;
 
 namespace AutomatedDispatcher.Pages.Employee
 {
     public class CreateModel : PageModel
     {
         private readonly AutomatedDispatcher.Data.webappContext _context;
+
+        public string Username { get; set; } // used for session
 
         public CreateModel(AutomatedDispatcher.Data.webappContext context)
         {
@@ -20,7 +23,22 @@ namespace AutomatedDispatcher.Pages.Employee
 
         public IActionResult OnGet()
         {
-            return Page();
+            Username = HttpContext.Session.GetString("username"); // establish session
+
+            if (Username != null )
+            {
+                return Page();
+            }
+            else
+            {
+                return RedirectToPage("../Index");
+            }
+        }
+
+        public IActionResult OnGetLogout()
+        {
+            HttpContext.Session.Remove("username");
+            return RedirectToPage("../Index");
         }
 
         [BindProperty]

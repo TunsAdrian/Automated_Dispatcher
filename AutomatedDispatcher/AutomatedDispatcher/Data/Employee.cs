@@ -23,7 +23,7 @@ namespace AutomatedDispatcher.Data
         [Range(0, 1, ErrorMessage = "Alege un rol valid")]
         public short Role { get; set; }
 
-        [RegularExpression(@"^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$", ErrorMessage = "The field Username should match the form example@domain.com")]
+        [RegularExpression(@"^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$", ErrorMessage = "Username-ul trebuie sa fie de forma example@domain.com")]
         [Required]
         public string Username { get; set; }
 

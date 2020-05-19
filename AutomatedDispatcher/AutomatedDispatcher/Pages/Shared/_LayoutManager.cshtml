@@ -28,10 +28,12 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-white" asp-area="" asp-page="../Employee/Create">Adauga angajat nou</a>
-
-                         </li>
+                        </li>
                         <li class="nav-item">
-                            <a class ="nav-link text-white" asp-page="" asp-page-handler="Logout">Logout</a>
+                            <a class="nav-link text-white" asp-area="" asp-page="../Skill/Create">Adauga skills</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" asp-page="" asp-page-handler="Logout">Logout</a>
                         </li>
                     </ul>
                 </div>
@@ -68,6 +70,21 @@
     <script type="text/javascript">
         $(document).ready(function () {
             $('#tableTaskManager').DataTable({
+                "scrollX": true,
+                "scrollY": 210,
+                "order": [],
+                "columnDefs": [{
+                    "targets": 'no-sort',
+                    "orderable": false,
+                }]
+            });
+            $('.dataTables_length').addClass('bs-select');
+        });
+    </script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#tableSkills').DataTable({
                 "scrollX": true,
                 "scrollY": 210,
                 "order": [],

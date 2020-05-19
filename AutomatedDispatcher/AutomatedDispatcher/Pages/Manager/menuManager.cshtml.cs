@@ -14,8 +14,8 @@ namespace AutomatedDispatcher.Pages.Manager
         private readonly IEmployeeRepository _employeeRepository;
 
 
-        [BindProperty]
-        public int Number { get; set; } // used for getting the values of dropdown menu
+       // [BindProperty]
+       // public int Number { get; set; } // used for getting the values of dropdown menu
 
 
         public string Username { get; set; } // used for session
@@ -55,9 +55,10 @@ namespace AutomatedDispatcher.Pages.Manager
             return RedirectToPage("../Index");
         }
 
-        public void OnPost()
-        {
-            // posted value is assigned to the Number property automatically
-        }
+        // This will be used for dropdown menu
+        //public void OnPost()
+        //{
+        //    // posted value is assigned to the Number property automatically
+        //}
     }
 }

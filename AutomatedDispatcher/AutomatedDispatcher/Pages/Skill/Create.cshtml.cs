@@ -1,6 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutomatedDispatcher.Repositories;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace AutomatedDispatcher.Pages.Skill
@@ -8,19 +11,24 @@ namespace AutomatedDispatcher.Pages.Skill
     public class CreateModel : PageModel
     {
         private readonly AutomatedDispatcher.Data.webappContext _context;
+        private readonly ISkillRepository _skillRepository;
 
-        public CreateModel(AutomatedDispatcher.Data.webappContext context)
+        public CreateModel(AutomatedDispatcher.Data.webappContext context, ISkillRepository skillRepository)
         {
             _context = context ?? throw new ArgumentNullException(nameof(context));
+
+            _skillRepository = skillRepository ?? throw new ArgumentNullException(nameof(skillRepository));
         }
 
-        public IActionResult OnGet()
-        {
-            return Page();
-        }
+        //public IActionResult OnGet()
+        //{
+        //    return Page();
+        //}
 
         [BindProperty]
         public Data.Skill Skill { get; set; }
+
+        public IEnumerable<Data.Skill> SkillList { get; set; } = new List<Data.Skill>();
 
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://aka.ms/RazorPagesCRUD.
@@ -34,7 +42,14 @@ namespace AutomatedDispatcher.Pages.Skill
             _context.Skill.Add(Skill);
             await _context.SaveChangesAsync();
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("../Manager/menuManager");
         }
+
+        public async System.Threading.Tasks.Task OnGetAsync()
+        {
+            // Get skill list
+            SkillList = await _context.Skill.ToListAsync();
+        }
+        
     }
 }

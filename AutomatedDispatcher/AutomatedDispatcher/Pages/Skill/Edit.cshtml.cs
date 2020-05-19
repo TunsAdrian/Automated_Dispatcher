@@ -62,7 +62,7 @@ namespace AutomatedDispatcher.Pages.Skill
                 }
             }
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("../Manager/menuManager");
         }
 
         private bool SkillExists(int id)

@@ -3,12 +3,15 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 
 namespace AutomatedDispatcher.Pages.Employee
 {
     public class EditModel : PageModel
     {
         private readonly AutomatedDispatcher.Data.webappContext _context;
+
+        public string Username { get; set; } // used for session
 
         public EditModel(AutomatedDispatcher.Data.webappContext context)
         {
@@ -20,18 +23,26 @@ namespace AutomatedDispatcher.Pages.Employee
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (id == null)
+            Username = HttpContext.Session.GetString("username"); // establish session
+            if (Username != null)
             {
-                return NotFound();
-            }
 
-            Employee = await _context.Employee.FirstOrDefaultAsync(m => m.Id == id);
+                if (id == null)
+                {
+                    return NotFound();
+                }
 
-            if (Employee == null)
+                Employee = await _context.Employee.FirstOrDefaultAsync(m => m.Id == id);
+
+                if (Employee == null)
+                {
+                    return NotFound();
+                }
+                return Page();
+            } else
             {
-                return NotFound();
+                return RedirectToPage("../Index");
             }
-            return Page();
         }
 
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
@@ -67,6 +78,12 @@ namespace AutomatedDispatcher.Pages.Employee
         private bool EmployeeExists(int id)
         {
             return _context.Employee.Any(e => e.Id == id);
+        }
+
+        public IActionResult OnGetLogout()
+        {
+            HttpContext.Session.Remove("username");
+            return RedirectToPage("../Index");
         }
     }
 }

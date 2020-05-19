@@ -1,4 +1,5 @@
 ﻿using AutomatedDispatcher.Repositories;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
@@ -12,6 +13,8 @@ namespace AutomatedDispatcher.Pages.Skill
     {
         private readonly AutomatedDispatcher.Data.webappContext _context;
         private readonly ISkillRepository _skillRepository;
+
+        public string Username { get; set; } // used for session
 
         public CreateModel(AutomatedDispatcher.Data.webappContext context, ISkillRepository skillRepository)
         {
@@ -47,9 +50,19 @@ namespace AutomatedDispatcher.Pages.Skill
 
         public async System.Threading.Tasks.Task OnGetAsync()
         {
-            // Get skill list
-            SkillList = await _context.Skill.ToListAsync();
+            Username = HttpContext.Session.GetString("username"); // establish session
+            if (Username != null)
+            {
+                // Get skill list
+                SkillList = await _context.Skill.ToListAsync();
+            } 
         }
-        
+
+        public IActionResult OnGetLogout()
+        {
+            HttpContext.Session.Remove("username");
+            return RedirectToPage("../Index");
+        }
+
     }
 }

@@ -20,6 +20,7 @@ namespace AutomatedDispatcher.Data
         public string Description { get; set; }
 
         [Required]
+        [Range(1, 10, ErrorMessage = "Alege o valoare intre 1 si 10")]
         public int Priority { get; set; }
 
         [Required]

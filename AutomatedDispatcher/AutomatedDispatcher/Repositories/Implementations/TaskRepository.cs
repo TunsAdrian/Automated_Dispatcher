@@ -47,6 +47,12 @@ namespace AutomatedDispatcher.Repositories.Implementations
             return await _dbContext.Tasks.ToListAsync();
         }
 
+        public async Task<IEnumerable<Data.Task>> GetTaskByStatus(int id)
+        {
+            return await _dbContext.Tasks
+                .Where(s => s.StatusId == id)
+                .ToListAsync();
+        }
         public async System.Threading.Tasks.Task UpdateAsync(Data.Task task)
         {
             _dbContext.Entry(task).State = EntityState.Modified;

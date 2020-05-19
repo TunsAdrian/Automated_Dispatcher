@@ -11,5 +11,6 @@ namespace AutomatedDispatcher.Repositories.Interfaces
         Task<Data.Task> AddAsync(Data.Task task);
         System.Threading.Tasks.Task UpdateAsync(Data.Task task);
         System.Threading.Tasks.Task DeleteAsync(Data.Task task);
+        Task<IEnumerable<Data.Task>> GetTaskByStatus(int id);
     }
 }

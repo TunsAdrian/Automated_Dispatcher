@@ -19,6 +19,7 @@ namespace AutomatedDispatcher.Pages.Programmer
         }
 
         public Data.Task Task { get; set; }
+        public Data.Status Status { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {

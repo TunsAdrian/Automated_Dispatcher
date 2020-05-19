@@ -1,12 +1,10 @@
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Threading.Tasks;
 using AutomatedDispatcher.Data;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
 
 using Microsoft.Extensions.Logging;
 
@@ -22,16 +20,14 @@ namespace AutomatedDispatcher.Pages
         }
 
         [Required, BindProperty]
-        public string Username { get; set; }
-        [BindProperty, Required]
-        public string Password { get; set; }
-
-        public string Msg { get; set; }
-
+      //  public AutomatedDispatcher.Data.Employee user { get; set; }
+            public string username { get; set; }
+        [Required, BindProperty]
+        public string password { get; set; }
 
         public void OnGet()
         {
-
+            
         }
 
         public IActionResult OnPost()
@@ -40,7 +36,7 @@ namespace AutomatedDispatcher.Pages
 
 
             var login = from employee in context.Employee
-                        where employee.Username.Equals(Username) == true && employee.Password.Equals(Password) == true
+                        where employee.Username.Equals(username) == true && employee.Password.Equals(password) == true
                         select employee; 
 
             if (ModelState.IsValid == false)
@@ -49,22 +45,28 @@ namespace AutomatedDispatcher.Pages
             }
             else
             {
-                //return RedirectToPage("/Manager/meniuManager");
+                //   return RedirectToPage("/Manager/menuManager", new { Logged = true} );
 
-                
+
                 foreach (var i in login)
                 {
                     if (i.Role == 0)
                     {
+                        HttpContext.Session.SetString("username", username);
                         return RedirectToPage("/Manager/menuManager");
-                    } else if (i.Role  == 1)
+
+
+                    }
+                    else if (i.Role == 1)
                     {
+                        HttpContext.Session.SetString("username", password);
                         return RedirectToPage("/Programmer/menuProgrammer");
-                    } 
+                    }
 
                 }
 
                 return Page();
+
             }
         }
     }

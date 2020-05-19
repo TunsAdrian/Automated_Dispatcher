@@ -18,29 +18,40 @@
         <thead>
             <tr>
 
-                <th scope="col">Name</th>
+                <th scope="col">Nume</th>
                 <th scope="col">Status</th>
-                <th scope="col">Priority</th>
-                <th scope="col">Expected Time</th>
-                <th scope="col">Start Date</th>
-                <th scope="col">End Date</th>
-                <th class="no-sort" scope="col">Options</th>
+                <th scope="col">Prioritate</th>
+                <th scope="col">Timp Estimat</th>
+                <th scope="col">Data inceput</th>
+                <th scope="col">Data final</th>
+                <th class="no-sort" scope="col">Optiuni</th>
             </tr>
         </thead>
         <tbody>
             @foreach (var task in Model.TaskList)
             {
-                <tr>
-                    <td>@task.Name</td>
-                    <td>@task.Status</td>
-                    <td>@task.Priority</td>
-                    <td>@task.ExpectedTime</td>
-                    <td>@task.StartDate</td>
-                    <td>@task.EndDate</td>
-                    <td>
-                        <a asp-page="./taskDetailsProgrammer" asp-route-id="@task.Id">Details</a>
-                    </td>
-                </tr>
+            <tr>
+                <td>@task.Name</td>
+                @if (task.StatusId == 1)
+                {
+                    <td>Completed</td>
+                }
+                else if (task.StatusId == 2)
+                {
+                    <td>Unassigned</td>
+                }
+                else if (task.StatusId == 3)
+                {
+                    <td>In progress</td>
+                }
+                <td>@task.Priority</td>
+                <td>@task.ExpectedTime</td>
+                <td>@task.StartDate</td>
+                <td>@task.EndDate</td>
+                <td>
+                    <a asp-page="./taskDetailsProgrammer" asp-route-id="@task.Id">Detalii</a>
+                </td>
+            </tr>
             }
         </tbody>
     </table>

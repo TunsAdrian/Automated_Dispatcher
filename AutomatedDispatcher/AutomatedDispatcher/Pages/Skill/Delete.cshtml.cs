@@ -49,7 +49,7 @@ namespace AutomatedDispatcher.Pages.Skill
                 await _context.SaveChangesAsync();
             }
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("../Manager/menuManager");
         }
     }
 }

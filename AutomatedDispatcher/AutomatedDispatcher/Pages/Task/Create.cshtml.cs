@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AutomatedDispatcher.Pages.Task
 {
-    public class CreateModel : PageModel
+    public class CreateModel : PageModel 
     {
         private readonly AutomatedDispatcher.Data.webappContext _context;
 
@@ -15,11 +16,31 @@ namespace AutomatedDispatcher.Pages.Task
             _context = context;
         }
 
+        public string Username { get; set; } // used for session
+
         public IActionResult OnGet()
         {
-            ViewData["EmployeeId"] = new SelectList(_context.Employee, "Id", "FirstName");
-            ViewData["StatusId"] = new SelectList(_context.Status, "Id", "Id");
-            return Page();
+            Username = HttpContext.Session.GetString("username"); // establish session
+
+            if (Username != null)
+            {
+
+                ViewData["EmployeeId"] = new SelectList(_context.Employee, "Id", "FirstName");
+                ViewData["StatusId"] = new SelectList(_context.Status, "Id", "Id");
+                return Page();
+
+            }
+            else
+            {
+                return RedirectToPage("../Index");
+            }
+            
+        }
+
+        public IActionResult OnGetLogout()
+        {
+            HttpContext.Session.Remove("username");
+            return RedirectToPage("../Index");
         }
 
         [BindProperty]
@@ -36,6 +57,9 @@ namespace AutomatedDispatcher.Pages.Task
 
             // When a task is created it should not be assigned to anyone
             Task.EmployeeId = null;
+
+            // When a task is created it should have an unassigned status
+            Task.StatusId = 2;
 
             // Set StartDate to create time   
             Task.StartDate = DateTime.Now;

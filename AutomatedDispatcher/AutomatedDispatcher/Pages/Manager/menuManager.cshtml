@@ -58,6 +58,7 @@
                 <th scope="col">Expected Time</th>
                 <th scope="col">Start Date</th>
                 <th scope="col">End Date</th>
+                <th scope="col">Employee</th>
                 <th class="no-sort" scope="col">Options</th>
             </tr>
         </thead>
@@ -66,11 +67,32 @@
             {
                 <tr>
                     <td>@task.Name</td>
-                    <td>@task.Status</td>
+                    @if(task.StatusId == 1)
+                    {
+                        <td>Completed</td>
+                    }
+                    else if(task.StatusId == 2)
+                    {
+                        <td>Unassigned</td>
+                    }
+                    else if(task.StatusId == 3)
+                    {
+                        <td>In Progress</td>
+                    }
                     <td>@task.Priority</td>
                     <td>@task.ExpectedTime</td>
                     <td>@task.StartDate</td>
                     <td>@task.EndDate</td>
+              
+                    <!-- Check statement to see if the task is assigned to someone or not. If it is, write his/her name, else write nothing-->
+                    @if(task.Employee != null)
+                    {
+                        <td>@task.Employee.FirstName @task.Employee.LastName</td>
+                    }
+                    else
+                    {
+                        <td></td>
+                    }
 
                     <td>
                         <a asp-page="../Task/Edit" asp-route-id="@task.Id">Edit</a> |

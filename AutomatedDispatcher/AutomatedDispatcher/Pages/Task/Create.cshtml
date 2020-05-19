@@ -10,75 +10,83 @@
 <hr />
 <div class="container">
     <form method="post">
-
         <!-- RAND 1-->
         <div class="row justify-content-center">
-            <!-- COLOANA 1-->
-            <div class="col-md-3 justify-content-center">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <div class="form-group">
-                    <label asp-for="Task.Name" class="control-label"></label>
-                    <input asp-for="Task.Name" class="form-control" />
-                    <span asp-validation-for="Task.Name" class="text-danger"></span>
-                </div>
+
+            <!-- COLOANA 1-2 -->
+            <div class="col-md-6 justify-content-center">
+                <img src="~/images/todo_icon.png" alt="" width="140" height="140" align="middle" style="display:block; margin:auto">
             </div>
 
-            <!-- COLOANA 2-->
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label asp-for="Task.StatusId" class="control-label"></label>
-                    <select asp-for="Task.StatusId" class="form-control" asp-items="ViewBag.StatusId"></select>
-                </div>
-            </div>
         </div>
 
+            <!-- RAND 2-->
+            <div class="row justify-content-center">
 
-        <!-- RAND 1-->
-        <div class="row justify-content-center">
-            <!-- COLOANA 1-->
-            <div class="col-md-3 justify-content-center">
-                <div class="form-group">
-                    <label asp-for="Task.Description" class="control-label"></label>
-                    <input asp-for="Task.Description" class="form-control" />
-                    <span asp-validation-for="Task.Description" class="text-danger"></span>
+                <!-- COLOANA 1-2 -->
+                <div class="col-md-6 justify-content-center">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="Task.Name" class="control-label">Nume task</label>
+                        <input asp-for="Task.Name" class="form-control" />
+                        <span asp-validation-for="Task.Name" class="text-danger"></span>
+                    </div>
                 </div>
 
             </div>
-            <!-- COLOANA 2-->
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label asp-for="Task.Priority" class="control-label"></label>
-                    <input asp-for="Task.Priority" class="form-control" />
-                    <span asp-validation-for="Task.Priority" class="text-danger"></span>
-                </div>
-            </div>
-        </div>
 
-        <!-- RAND 1-->
-        <div class="row justify-content-center">
-            <!-- COLOANA 1-->
-            <div class="col-md-3 justify-content-center">
-                <div class="form-group">
-                    <label asp-for="Task.ExpectedTime" class="control-label"></label>
-                    <input asp-for="Task.ExpectedTime" class="form-control" />
-                    <span asp-validation-for="Task.ExpectedTime" class="text-danger"></span>
+
+            <!-- RAND 3-->
+            <div class="row justify-content-center">
+                <!-- COLOANA 1-->
+                <div class="col-md-3 justify-content-center">
+                    <div class="form-group">
+                        <label asp-for="Task.ExpectedTime" class="control-label">Timp estimat (ore)</label>
+                        <input asp-for="Task.ExpectedTime" class="form-control" />
+                        <span asp-validation-for="Task.ExpectedTime" class="text-danger"></span>
+                    </div>
+                </div>
+                <!-- COLOANA 2-->
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label asp-for="Task.Priority" class="control-label">Prioritatea (min 10 - 1 max)</label>
+                        <input asp-for="Task.Priority" class="form-control" />
+                        <span asp-validation-for="Task.Priority" class="text-danger"></span>
+                    </div>
                 </div>
             </div>
-            <!-- COLOANA 2-->
-            <div class="col-md-3">
-                <div class="form-group">
-                    <input type="submit" value="Create" class="btn btn-primary" />
+
+            <!-- RAND 4-->
+            <div class="row justify-content-center">
+                <!-- COLOANA 1-2 deorece descrierea este mai lunga-->
+                <div class="col-md-6 justify-content-center">
+                    <div class="form-group">
+                        <label asp-for="Task.Description" class="control-label">Descriere</label>
+                        <textarea rows="3" asp-for="Task.Description" class="form-control"></textarea>
+                        <span asp-validation-for="Task.Description" class="text-danger"></span>
+                    </div>
                 </div>
             </div>
-        </div>
+
+            <!-- RAND 5-->
+            <div class="row justify-content-center">
+                <!-- COLOANA 1-2 d-->
+                <div class="col-md-3 justify-content-center">
+                    <div class="form-group">
+                        <input type="submit" value="Create" class="btn btn-primary" />
+                    </div>
+                </div>
+                <!-- COLOANA 2-->
+                <div class="col-md-3 justify-content-center">
+                    <div>
+                        <a asp-page="../Manager/menuManager">Inapoi la meniu</a>
+                    </div>
+                </div>
+            </div>
 
     </form>
 </div>
 
-
-<div>
-    <a asp-page="../Manager/menuManager">Inapoi la meniu</a>
-</div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

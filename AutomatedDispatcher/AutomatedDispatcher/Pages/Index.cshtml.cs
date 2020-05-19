@@ -19,9 +19,11 @@ namespace AutomatedDispatcher.Pages
             _logger = logger;
         }
 
+        //  public AutomatedDispatcher.Data.Employee user { get; set; }
+
+
         [Required, BindProperty]
-      //  public AutomatedDispatcher.Data.Employee user { get; set; }
-            public string username { get; set; }
+        public string username { get; set; }
         [Required, BindProperty]
         public string password { get; set; }
 

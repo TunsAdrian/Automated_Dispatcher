@@ -6,54 +6,118 @@
     Layout = "~/Pages/Shared/_LayoutManager.cshtml";
 }
 
-<h1>Create</h1>
 
-<h4>Employee</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Employee.FirstName" class="control-label"></label>
-                <input asp-for="Employee.FirstName" class="form-control" />
-                <span asp-validation-for="Employee.FirstName" class="text-danger"></span>
+<!-- CIUCUR DANIEL 
+
+    Ca sa afise datele din formular
+    imi fac un GRID de 2 coloane cu 4 randuri
+    <div class="row justify-content-center"> - inseamna aseaza coloana in mijlocul containerului
+
+    -->
+
+<form method="post">
+    <div class="container" style="background-color: rgb(153,204,255)">
+
+        <!-- RAND 1-->
+        <div class="row justify-content-center">
+            <!-- COLOANA 1-->
+            <div class="col-md-3 justify-content-center">
+                <img src="~/images/profile.png" alt="" width="100" height="100" align="middle">
             </div>
-            <div class="form-group">
-                <label asp-for="Employee.LastName" class="control-label"></label>
-                <input asp-for="Employee.LastName" class="form-control" />
-                <span asp-validation-for="Employee.LastName" class="text-danger"></span>
+            <!-- COLOANA 2-->
+            <div class="col-md-3">
+                <h4>Introduceti datele noului angajat:</h4>
             </div>
-            <div class="form-group">
-                <label asp-for="Employee.Role" class="control-label"></label>
-                <input asp-for="Employee.Role" class="form-control" />
-                <span asp-validation-for="Employee.Role" class="text-danger"></span>
+
+        </div>
+
+        <!-- RAND 1-->
+        <div class="row justify-content-center">
+            <!-- COLOANA 1-->
+            <div class="col-md-3">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Employee.FirstName" class="control-label"></label>
+                    <input asp-for="Employee.FirstName" class="form-control form-control-sm" />
+                    <span asp-validation-for="Employee.FirstName" class="text-danger"></span>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Employee.Username" class="control-label"></label>
-                <input asp-for="Employee.Username" class="form-control" />
-                <span asp-validation-for="Employee.Username" class="text-danger"></span>
+
+            <!-- COLOANA 2-->
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label asp-for="Employee.LastName" class="control-label"></label>
+                    <input asp-for="Employee.LastName" class="form-control form-control-sm" />
+                    <span asp-validation-for="Employee.LastName" class="text-danger"></span>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Employee.Password" class="control-label"></label>
-                <input asp-for="Employee.Password" class="form-control" />
-                <span asp-validation-for="Employee.Password" class="text-danger"></span>
+        </div>
+
+        <!-- RAND 2-->
+        <div class="row justify-content-center">
+
+            <!-- COLOANA 1-->
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label asp-for="Employee.Role" class="control-label"></label>
+                    <input asp-for="Employee.Role" class="form-control form-control-sm" />
+                    <span asp-validation-for="Employee.Role" class="text-danger"></span>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Employee.WorkingHours" class="control-label"></label>
-                <input asp-for="Employee.WorkingHours" class="form-control" />
-                <span asp-validation-for="Employee.WorkingHours" class="text-danger"></span>
+
+            <!-- COLOANA 2-->
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label asp-for="Employee.Username" class="control-label"></label>
+                    <input asp-for="Employee.Username" class="form-control form-control-sm" />
+                    <span asp-validation-for="Employee.Username" class="text-danger"></span>
+                </div>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+
+        </div>
+
+        <!-- RAND 3-->
+        <div class="row justify-content-center">
+
+            <!-- COLOANA 1-->
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label asp-for="Employee.Password" class="control-label"></label>
+                    <input asp-for="Employee.Password" class="form-control form-control-sm" />
+                    <span asp-validation-for="Employee.Password" class="text-danger"></span>
+                </div>
             </div>
-        </form>
+
+            <!-- COLOANA 2-->
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label asp-for="Employee.WorkingHours" class="control-label"></label>
+                    <input asp-for="Employee.WorkingHours" class="form-control form-control-sm" />
+                    <span asp-validation-for="Employee.WorkingHours" class="text-danger"></span>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- RAND 4-->
+        <div class="row justify-content-center">
+
+            <!-- COLOANA 1-->
+            <div class="col-md-3">
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </div>
+
+            <!-- COLOANA 2-->
+            <div class="col-md-3">
+                <div>
+                    <a asp-page="../Manager/menuManager">Inapoi la lista</a>
+                </div>
+            </div>
+        </div>
     </div>
-</div>
-
-<div>
-    <a asp-page="../Manager/menuManager">Back to List</a>
-</div>
+</form>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

@@ -32,6 +32,10 @@ namespace AutomatedDispatcher
             // Added real database dependecy
             // services.AddDbContext<webappContext>(c =>c.UseSqlServer(Configuration.GetConnectionString("webappContext")));
 
+            services.AddSession();
+
+            services.AddMemoryCache(); // memory is configured for cache
+
             services.AddRazorPages();
         }
 
@@ -50,7 +54,10 @@ namespace AutomatedDispatcher
             }
 
             app.UseHttpsRedirection();
+
             app.UseStaticFiles();
+
+            app.UseSession();
 
             app.UseRouting();
 

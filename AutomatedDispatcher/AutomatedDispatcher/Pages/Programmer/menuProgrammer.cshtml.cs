@@ -22,7 +22,7 @@ namespace AutomatedDispatcher.Pages.Programmer
   
         }
         public IEnumerable<Data.Task> TaskList { get; set; } = new List<Data.Task>();
-        public async Task<IActionResult> OnGetAsync(Boolean Logged)
+        public async Task<IActionResult> OnGetAsync()
         {
 
             Username = HttpContext.Session.GetString("username");

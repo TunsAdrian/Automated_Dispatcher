@@ -29,7 +29,7 @@ namespace AutomatedDispatcher.Pages.Programmer
 
             if (Username != null)
             {
-                TaskList = await _taskRepository.GetTaskListAsync();
+                TaskList = await _taskRepository.GetTaskListByIdAsync(3);
                 return Page();
             } else
 

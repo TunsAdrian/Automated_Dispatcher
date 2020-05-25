@@ -6,6 +6,7 @@ namespace AutomatedDispatcher.Repositories.Interfaces
     public interface ITaskRepository
     {
         Task<IEnumerable<Data.Task>> GetTaskListAsync();
+        Task<IEnumerable<Data.Task>> GetTaskListByIdAsync(int id);
         Task<Data.Task> GetTaskByIdAsync(int id);
         Task<IEnumerable<Data.Task>> GetTaskByNameAsync(string name);
         Task<Data.Task> AddAsync(Data.Task task);

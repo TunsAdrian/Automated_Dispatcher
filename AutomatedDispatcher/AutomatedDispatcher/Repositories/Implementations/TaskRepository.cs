@@ -47,6 +47,10 @@ namespace AutomatedDispatcher.Repositories.Implementations
             return await _dbContext.Tasks.ToListAsync();
         }
 
+        public async Task<IEnumerable<Data.Task>> GetTaskListByIdAsync(int id)
+        {
+            return await _dbContext.Tasks.Where( p => p.EmployeeId == id).ToListAsync();
+        }
         public async Task<IEnumerable<Data.Task>> GetTaskByStatus(int id)
         {
             return await _dbContext.Tasks
@@ -57,6 +61,11 @@ namespace AutomatedDispatcher.Repositories.Implementations
         {
             _dbContext.Entry(task).State = EntityState.Modified;
             await _dbContext.SaveChangesAsync();
+        }
+
+        public Task<IEnumerable<Data.Task>> GetTaskListByIdAsync()
+        {
+            throw new NotImplementedException();
         }
     }
 }

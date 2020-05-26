@@ -28,6 +28,7 @@ namespace AutomatedDispatcher
             services.AddScoped<ISkillRepository, SkillRepository>();
             services.AddScoped<ITaskRepository, TaskRepository>();
             services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+            services.AddScoped<IEmployeeSkillRepository, EmployeeSkillRepository>();
 
             // Added real database dependecy
             // services.AddDbContext<webappContext>(c =>c.UseSqlServer(Configuration.GetConnectionString("webappContext")));

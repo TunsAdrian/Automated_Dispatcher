@@ -16,7 +16,6 @@ namespace AutomatedDispatcher.Pages.Programmer
         private readonly IEmployeeRepository _employeeRepository;
 
         public string Username { get; set; } // used for session
-        public int Id { get; set; }
 
         public menuProgrammerModel(ITaskRepository taskRepository)
         {
@@ -24,16 +23,16 @@ namespace AutomatedDispatcher.Pages.Programmer
   
         }
         public IEnumerable<Data.Task> TaskList { get; set; } = new List<Data.Task>();
-        public async Task<IActionResult> OnGetAsync(int id)
+        public async Task<IActionResult> OnGetAsync()
         {
 
             Username = HttpContext.Session.GetString("username");
 
-            Id = id;
+            int id = HttpContext.Session.GetInt32("id").Value;
 
             if (Username != null)
             {
-                TaskList = await _taskRepository.GetTaskListByIdAsync(Id);
+                TaskList = await _taskRepository.GetTaskListByIdAsync(id);
                 return Page();
             } else
 

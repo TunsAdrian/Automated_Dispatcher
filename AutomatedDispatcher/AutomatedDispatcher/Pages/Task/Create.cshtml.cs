@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AutomatedDispatcher.Repositories.Interfaces;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -10,16 +11,19 @@ namespace AutomatedDispatcher.Pages.Task
     public class CreateModel : PageModel 
     {
         private readonly AutomatedDispatcher.Data.webappContext _context;
+        private readonly ITaskRepository _taskRepository;
 
-        public CreateModel(AutomatedDispatcher.Data.webappContext context)
+        public CreateModel(AutomatedDispatcher.Data.webappContext context, ITaskRepository taskRepository)
         {
-            _context = context;
+            _context = context ?? throw new ArgumentNullException(nameof(context));
+            _taskRepository = taskRepository ?? throw new ArgumentNullException(nameof(taskRepository));
         }
 
         public string Username { get; set; } // used for session
 
         public IActionResult OnGet()
         {
+
             Username = HttpContext.Session.GetString("username"); // establish session
 
             if (Username != null)
@@ -34,7 +38,6 @@ namespace AutomatedDispatcher.Pages.Task
             {
                 return RedirectToPage("../Index");
             }
-            
         }
 
         public IActionResult OnGetLogout()
@@ -64,8 +67,7 @@ namespace AutomatedDispatcher.Pages.Task
             // Set StartDate to create time   
             Task.StartDate = DateTime.Now;
 
-            _context.Task.Add(Task);
-            await _context.SaveChangesAsync();
+            Task = await _taskRepository.AddAsync(Task);
 
             return RedirectToPage("../Manager/menuManager");
         }

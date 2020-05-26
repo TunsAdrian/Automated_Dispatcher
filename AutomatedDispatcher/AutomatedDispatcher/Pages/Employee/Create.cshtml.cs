@@ -7,18 +7,21 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using AutomatedDispatcher.Data;
 using Microsoft.AspNetCore.Http;
+using AutomatedDispatcher.Repositories.Interfaces;
 
 namespace AutomatedDispatcher.Pages.Employee
 {
     public class CreateModel : PageModel
     {
         private readonly AutomatedDispatcher.Data.webappContext _context;
+        private readonly IEmployeeRepository _employeeRepository;
 
         public string Username { get; set; } // used for session
 
-        public CreateModel(AutomatedDispatcher.Data.webappContext context)
+        public CreateModel(AutomatedDispatcher.Data.webappContext context, IEmployeeRepository employeeRepository)
         {
             _context = context;
+            _employeeRepository = employeeRepository ?? throw new ArgumentNullException(nameof(employeeRepository));
         }
 
         public IActionResult OnGet()
@@ -56,8 +59,7 @@ namespace AutomatedDispatcher.Pages.Employee
             // Set iniital current workload to 0
             Employee.CurrentWorkload = 0;
 
-            _context.Employee.Add(Employee);
-            await _context.SaveChangesAsync();
+            Employee = await _employeeRepository.AddAsync(Employee);
 
             return RedirectToPage("../Manager/menuManager");
         }

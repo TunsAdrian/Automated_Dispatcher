@@ -50,7 +50,7 @@ namespace AutomatedDispatcher.Repositories.Implementations
         public async Task<IEnumerable<Data.Task>> GetTaskListByIdAsync(int id)
         {
             return await _dbContext.Tasks
-            .Where( p => p.EmployeeId == id)
+            .Where( p => p.EmployeeId == id && p.StatusId == 3)
             .ToListAsync();
         }
         public async Task<IEnumerable<Data.Task>> GetTaskByStatus(int id)

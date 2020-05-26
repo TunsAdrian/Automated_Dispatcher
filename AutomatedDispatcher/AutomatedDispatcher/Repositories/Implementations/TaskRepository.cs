@@ -55,7 +55,16 @@ namespace AutomatedDispatcher.Repositories.Implementations
         }
         public async System.Threading.Tasks.Task UpdateAsync(Data.Task task)
         {
-            _dbContext.Entry(task).State = EntityState.Modified;
+            var excluded = new[] { "StatusId", "StartDate", "EndDate" };
+
+            var entry = _dbContext.Entry(task);
+            entry.State = EntityState.Modified;
+
+            foreach(var item in excluded)
+            {
+                entry.Property(item).IsModified = false;
+            }
+
             await _dbContext.SaveChangesAsync();
         }
     }

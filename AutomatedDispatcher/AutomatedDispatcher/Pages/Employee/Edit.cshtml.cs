@@ -4,18 +4,22 @@ using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
+using AutomatedDispatcher.Repositories.Interfaces;
+using System;
 
 namespace AutomatedDispatcher.Pages.Employee
 {
     public class EditModel : PageModel
     {
         private readonly AutomatedDispatcher.Data.webappContext _context;
+        private readonly IEmployeeRepository _employeeRepository;
 
         public string Username { get; set; } // used for session
 
-        public EditModel(AutomatedDispatcher.Data.webappContext context)
+        public EditModel(AutomatedDispatcher.Data.webappContext context, IEmployeeRepository employeeRepository)
         {
             _context = context;
+            _employeeRepository = employeeRepository ?? throw new ArgumentNullException(nameof(employeeRepository));
         }
 
         [BindProperty]
@@ -54,11 +58,12 @@ namespace AutomatedDispatcher.Pages.Employee
                 return Page();
             }
 
-            _context.Attach(Employee).State = EntityState.Modified;
+            //_context.Attach(Employee).State = EntityState.Modified;
 
             try
             {
-                await _context.SaveChangesAsync();
+                //await _context.SaveChangesAsync();
+                await _employeeRepository.UpdateAsync(Employee);
             }
             catch (DbUpdateConcurrencyException)
             {

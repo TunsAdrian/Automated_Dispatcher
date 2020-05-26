@@ -38,9 +38,7 @@ namespace AutomatedDispatcher.Pages.Programmer
 
             {
                 return RedirectToPage("../Index");
-            }
-         
-            
+            }            
         }
 
         public IActionResult OnGetLogout()

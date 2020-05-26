@@ -51,7 +51,7 @@
     <!-- Imported .js libraries from datatables.net -->
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
 
-    <!-- Function used on task table. It waits for the document to be fully ready and the calls DataTAables function on the table. -->
+    <!-- (document).ready checks the DOM of the page and when is ready it executes the JS code. -->
     <script type="text/javascript">
         $(document).ready(function () {
             $('#tableProgrammersManager').DataTable({
@@ -63,12 +63,7 @@
                     "orderable": false,
                 }]
             });
-            $('.dataTables_length').addClass('bs-select');
-        });
-    </script>
 
-    <script type="text/javascript">
-        $(document).ready(function () {
             $('#tableTaskManager').DataTable({
                 "scrollX": true,
                 "scrollY": 210,
@@ -78,12 +73,7 @@
                     "orderable": false,
                 }]
             });
-            $('.dataTables_length').addClass('bs-select');
-        });
-    </script>
 
-    <script type="text/javascript">
-        $(document).ready(function () {
             $('#tableSkills').DataTable({
                 "scrollX": true,
                 "scrollY": 210,
@@ -93,7 +83,6 @@
                     "orderable": false,
                 }]
             });
-            $('.dataTables_length').addClass('bs-select');
         });
     </script>
 

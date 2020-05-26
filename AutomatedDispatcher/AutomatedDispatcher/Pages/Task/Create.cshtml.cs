@@ -67,6 +67,9 @@ namespace AutomatedDispatcher.Pages.Task
             // Set StartDate to create time   
             Task.StartDate = DateTime.Now;
 
+            // If not description set default
+            if (Task.Description == null) Task.Description = "-";
+
             Task = await _taskRepository.AddAsync(Task);
 
             return RedirectToPage("../Manager/menuManager");

@@ -49,7 +49,16 @@ namespace AutomatedDispatcher.Repositories.Implementations
 
         public async System.Threading.Tasks.Task UpdateAsync(Employee employee)
         {
-            _dbContext.Entry(employee).State = EntityState.Modified;
+            var excluded = new[] { "CurrentWorkload" };
+
+            var entry = _dbContext.Entry(employee);
+            entry.State = EntityState.Modified;
+
+            foreach (var item in excluded)
+            {
+                entry.Property(item).IsModified = false;
+            }
+
             await _dbContext.SaveChangesAsync();
         }
     }

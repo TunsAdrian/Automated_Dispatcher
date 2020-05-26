@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AutomatedDispatcher.Repositories.Interfaces;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -11,12 +13,14 @@ namespace AutomatedDispatcher.Pages.Task
     public class EditModel : PageModel
     {
         private readonly AutomatedDispatcher.Data.webappContext _context;
+        private readonly ITaskRepository _taskRepository;
 
         public string Username { get; set; } // used for session
 
-        public EditModel(AutomatedDispatcher.Data.webappContext context)
+        public EditModel(AutomatedDispatcher.Data.webappContext context, ITaskRepository taskRepository)
         {
             _context = context;
+            _taskRepository = taskRepository ?? throw new ArgumentNullException(nameof(taskRepository));
         }
 
         [BindProperty]
@@ -36,14 +40,14 @@ namespace AutomatedDispatcher.Pages.Task
 
                 Task = await _context.Task
                     .Include(t => t.Employee)
-                    .Include(t => t.Status).FirstOrDefaultAsync(m => m.Id == id);
+                   .FirstOrDefaultAsync(m => m.Id == id);
 
                 if (Task == null)
                 {
                     return NotFound();
                 }
                 ViewData["EmployeeId"] = new SelectList(_context.Employee, "Id", "FirstName");
-                ViewData["StatusId"] = new SelectList(_context.Status, "Id", "Id");
+                //ViewData["StatusId"] = new SelectList(_context.Status, "Id", "Id");
                 return Page();
             } else
             {
@@ -60,11 +64,12 @@ namespace AutomatedDispatcher.Pages.Task
                 return Page();
             }
 
-            _context.Attach(Task).State = EntityState.Modified;
+            //_context.Attach(Task).State = EntityState.Modified;
 
             try
             {
-                await _context.SaveChangesAsync();
+                //await _context.SaveChangesAsync();
+                await _taskRepository.UpdateAsync(Task);
             }
             catch (DbUpdateConcurrencyException)
             {

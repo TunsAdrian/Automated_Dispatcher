@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using AutomatedDispatcher.Repositories.Interfaces;
@@ -22,14 +23,16 @@ namespace AutomatedDispatcher.Pages.Programmer
   
         }
         public IEnumerable<Data.Task> TaskList { get; set; } = new List<Data.Task>();
-        public async Task<IActionResult> OnGetAsync(Boolean Logged)
+        public async Task<IActionResult> OnGetAsync()
         {
 
             Username = HttpContext.Session.GetString("username");
 
+            int id = HttpContext.Session.GetInt32("id").Value;
+
             if (Username != null)
             {
-                TaskList = await _taskRepository.GetTaskListAsync();
+                TaskList = await _taskRepository.GetTaskListByIdAsync(id);
                 return Page();
             } else
 

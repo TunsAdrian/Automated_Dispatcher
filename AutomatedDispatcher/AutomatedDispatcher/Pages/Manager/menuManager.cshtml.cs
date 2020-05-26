@@ -13,13 +13,7 @@ namespace AutomatedDispatcher.Pages.Manager
         private readonly ITaskRepository _taskRepository;
         private readonly IEmployeeRepository _employeeRepository;
 
-
-       // [BindProperty]
-       // public int Number { get; set; } // used for getting the values of dropdown menu
-
-
-        public string Username { get; set; } // used for session
-        
+        public string Username { get; set; } // used for session      
 
         public menuManagerModel(ITaskRepository taskRepository, IEmployeeRepository employeeRepository)
         {
@@ -54,11 +48,5 @@ namespace AutomatedDispatcher.Pages.Manager
             HttpContext.Session.Remove("username");
             return RedirectToPage("../Index");
         }
-
-        // This will be used for dropdown menu
-        //public void OnPost()
-        //{
-        //    // posted value is assigned to the Number property automatically
-        //}
     }
 }

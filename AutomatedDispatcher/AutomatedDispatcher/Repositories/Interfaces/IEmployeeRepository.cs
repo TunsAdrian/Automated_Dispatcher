@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using AutomatedDispatcher.Data;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace AutomatedDispatcher.Repositories.Interfaces
@@ -11,5 +12,7 @@ namespace AutomatedDispatcher.Repositories.Interfaces
         Task<Data.Employee> AddAsync(Data.Employee employee);
         System.Threading.Tasks.Task UpdateAsync(Data.Employee employee);
         System.Threading.Tasks.Task DeleteAsync(Data.Employee employee);
+
+        Task<IEnumerable<Employee>> GetEmployeesMinWorkload();
     }
 }

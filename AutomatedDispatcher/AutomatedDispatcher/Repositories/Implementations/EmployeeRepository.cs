@@ -61,5 +61,13 @@ namespace AutomatedDispatcher.Repositories.Implementations
 
             await _dbContext.SaveChangesAsync();
         }
+
+        public async Task<IEnumerable<Employee>> GetEmployeesMinWorkload()
+        {
+            var minWorkload = _dbContext.Employee.Min(s => s.CurrentWorkload);
+            return await _dbContext.Employee
+                .Where(s => s.CurrentWorkload == minWorkload)
+                .ToListAsync();
+        }
     }
 }

@@ -28,7 +28,10 @@
                 <input type="hidden" asp-for="Task.Id" />
                 <div class="form-group">
                     <label asp-for="Task.EmployeeId" class="control-label">Programator asignat</label>
-                    <select asp-for="Task.EmployeeId" class="form-control" asp-items="ViewBag.EmployeeId"></select>
+                    <!-- here -->
+                    <select asp-for="Task.EmployeeId" class="form-control" asp-items="ViewBag.EmployeeId">
+                        <option disabled selected>--- Alegeti un angajat ---</option>
+                    </select>
                     <span asp-validation-for="Task.EmployeeId" class="text-danger"></span>
                 </div>
             </div>

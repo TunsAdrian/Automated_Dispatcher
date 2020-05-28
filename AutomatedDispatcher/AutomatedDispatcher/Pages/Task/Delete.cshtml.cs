@@ -12,6 +12,7 @@ namespace AutomatedDispatcher.Pages.Task
     {
         private readonly AutomatedDispatcher.Data.webappContext _context;
         private readonly IEmployeeRepository _employeeRepository;
+
         public string Username { get; set; } // used for session
 
         public DeleteModel(AutomatedDispatcher.Data.webappContext context, IEmployeeRepository employeeRepository)
@@ -23,6 +24,7 @@ namespace AutomatedDispatcher.Pages.Task
         [BindProperty]
         public Data.Task Task { get; set; }
         public Data.Employee Employee { get; set; }
+        public String employeeFullName { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -44,6 +46,9 @@ namespace AutomatedDispatcher.Pages.Task
                 {
                     return NotFound();
                 }
+
+                Employee = await _employeeRepository.GetEmployeeByIdAsync(Task.EmployeeId.Value);
+                employeeFullName = Employee.FirstName + " " + Employee.LastName;
                 return Page();
 
             } else

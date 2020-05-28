@@ -28,7 +28,7 @@
                 <tr>
                     <td>@skill.SkillName</td>
                     <td>
-                        <a asp-page="../Skill/Edit" asp-route-id="@skill.Id">Editeaza</a> 
+                        <a asp-page="../Skill/Edit" asp-route-id="@skill.Id">Editeaza</a> |
                         @*<a asp-page="../Skill/Details" asp-route-id="@skill.Id">Detalii</a>*@
                         <a asp-page="../Skill/Delete" asp-route-id="@skill.Id">Sterge</a>
                     </td>
@@ -48,15 +48,13 @@
                     <span asp-validation-for="Skill.SkillName" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <input type="submit" value="Create" class="btn btn-primary" />
+                    <input type="submit" value="Create" class="btn btn-primary" /> |
+                    <a asp-page="../Manager/menuManager">Back to List</a>
                 </div>
             </form>
         </div>
     </div>
 
-    <div>
-        <a asp-page="../Manager/menuManager">Back to List</a>
-    </div>
 </div>
     @section Scripts {
         @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

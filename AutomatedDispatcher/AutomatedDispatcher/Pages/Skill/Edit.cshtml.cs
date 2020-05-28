@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -16,23 +17,33 @@ namespace AutomatedDispatcher.Pages.Skill
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
+        public string Username { get; set; } // used for session
+
         [BindProperty]
         public Data.Skill Skill { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (id == null)
+            Username = HttpContext.Session.GetString("username"); // establish session
+            if (Username != null)
             {
-                return NotFound();
-            }
 
-            Skill = await _context.Skill.FirstOrDefaultAsync(m => m.Id == id);
+                if (id == null)
+                {
+                    return NotFound();
+                }
 
-            if (Skill == null)
+                Skill = await _context.Skill.FirstOrDefaultAsync(m => m.Id == id);
+
+                if (Skill == null)
+                {
+                    return NotFound();
+                }
+                return Page();
+            } else
             {
-                return NotFound();
+                return RedirectToPage("../Index");
             }
-            return Page();
         }
 
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
@@ -62,7 +73,13 @@ namespace AutomatedDispatcher.Pages.Skill
                 }
             }
 
-            return RedirectToPage("../Manager/menuManager");
+            return RedirectToPage("Create");
+        }
+
+        public IActionResult OnGetLogout()
+        {
+            HttpContext.Session.Remove("username");
+            return RedirectToPage("../Index");
         }
 
         private bool SkillExists(int id)

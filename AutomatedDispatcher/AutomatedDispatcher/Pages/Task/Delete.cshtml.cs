@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AutomatedDispatcher.Repositories.Interfaces;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Threading.Tasks;
 
 namespace AutomatedDispatcher.Pages.Task
@@ -9,15 +11,18 @@ namespace AutomatedDispatcher.Pages.Task
     public class DeleteModel : PageModel
     {
         private readonly AutomatedDispatcher.Data.webappContext _context;
+        private readonly IEmployeeRepository _employeeRepository;
         public string Username { get; set; } // used for session
 
-        public DeleteModel(AutomatedDispatcher.Data.webappContext context)
+        public DeleteModel(AutomatedDispatcher.Data.webappContext context, IEmployeeRepository employeeRepository)
         {
             _context = context;
+            _employeeRepository = employeeRepository ?? throw new ArgumentNullException(nameof(employeeRepository));
         }
 
         [BindProperty]
         public Data.Task Task { get; set; }
+        public Data.Employee Employee { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -58,6 +63,12 @@ namespace AutomatedDispatcher.Pages.Task
 
             if (Task != null)
             {
+                // If task is "In Progress", update Current Workload
+                if (Task.StatusId == 3)
+                {
+                    Employee = await _employeeRepository.GetEmployeeByIdAsync(Task.EmployeeId.Value);
+                    Employee.CurrentWorkload -= Task.ExpectedTime;
+                }
                 _context.Task.Remove(Task);
                 await _context.SaveChangesAsync();
             }

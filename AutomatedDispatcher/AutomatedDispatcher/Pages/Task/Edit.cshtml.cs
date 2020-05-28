@@ -14,17 +14,21 @@ namespace AutomatedDispatcher.Pages.Task
     {
         private readonly AutomatedDispatcher.Data.webappContext _context;
         private readonly ITaskRepository _taskRepository;
+        private readonly IEmployeeRepository _employeeRepository;
 
         public string Username { get; set; } // used for session
 
-        public EditModel(AutomatedDispatcher.Data.webappContext context, ITaskRepository taskRepository)
+        public EditModel(AutomatedDispatcher.Data.webappContext context, ITaskRepository taskRepository, IEmployeeRepository employeeRepository)
         {
             _context = context;
             _taskRepository = taskRepository ?? throw new ArgumentNullException(nameof(taskRepository));
+            _employeeRepository = employeeRepository ?? throw new ArgumentNullException(nameof(employeeRepository));
         }
 
         [BindProperty]
         public Data.Task Task { get; set; }
+        public Data.Employee Employee { get; set; }
+        public String employeeFullName { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -46,6 +50,9 @@ namespace AutomatedDispatcher.Pages.Task
                 {
                     return NotFound();
                 }
+                Employee = await _employeeRepository.GetEmployeeByIdAsync(Task.EmployeeId.Value);
+                employeeFullName = Employee.FirstName + " " + Employee.LastName;
+
                 ViewData["EmployeeId"] = new SelectList(_context.Employee, "Id", "FirstName");
                 //ViewData["StatusId"] = new SelectList(_context.Status, "Id", "Id");
                 return Page();
@@ -70,6 +77,7 @@ namespace AutomatedDispatcher.Pages.Task
             {
                 //await _context.SaveChangesAsync();
                 await _taskRepository.UpdateAsync(Task);
+                
             }
             catch (DbUpdateConcurrencyException)
             {

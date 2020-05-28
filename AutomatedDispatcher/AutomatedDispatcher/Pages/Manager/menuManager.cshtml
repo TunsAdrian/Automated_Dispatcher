@@ -51,7 +51,7 @@
                     <td>@task.EndDate</td>
 
                     <!-- Check statement to see if the task is assigned to someone or not. If it is, write his/her name, else write nothing-->
-                    @if (task.Employee != null)
+                    @if (task.Employee != null && task.StatusId == 3)
                     {
                         <td>@task.Employee.FirstName @task.Employee.LastName</td>
                     }

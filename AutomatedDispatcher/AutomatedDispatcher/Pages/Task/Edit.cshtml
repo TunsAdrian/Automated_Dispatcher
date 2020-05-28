@@ -27,9 +27,9 @@
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <input type="hidden" asp-for="Task.Id" />
                 <div class="form-group">
-                    <label asp-for="Task.EmployeeId" class="control-label">Programator asignat</label>
-                    <select asp-for="Task.EmployeeId" class="form-control" asp-items="ViewBag.EmployeeId"></select>
-                    <span asp-validation-for="Task.EmployeeId" class="text-danger"></span>
+                    <label asp-for="@Model.employeeFullName" class="control-label">Programator asignat</label>
+                    <input asp-for="@Model.employeeFullName" class="form-control" readonly />
+                    <span asp-validation-for="@Model.employeeFullName" class="text-danger"></span>
                 </div>
             </div>
 

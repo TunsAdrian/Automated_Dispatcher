@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace AutomatedDispatcher.Pages.Task
@@ -12,11 +14,12 @@ namespace AutomatedDispatcher.Pages.Task
     {
         private readonly AutomatedDispatcher.Data.webappContext _context;
         private readonly ITaskRepository _taskRepository;
-
-        public CreateModel(AutomatedDispatcher.Data.webappContext context, ITaskRepository taskRepository)
+        private readonly IEmployeeRepository _employeeRepository;
+        public CreateModel(AutomatedDispatcher.Data.webappContext context, ITaskRepository taskRepository, IEmployeeRepository employeeRepository)
         {
             _context = context ?? throw new ArgumentNullException(nameof(context));
             _taskRepository = taskRepository ?? throw new ArgumentNullException(nameof(taskRepository));
+            _employeeRepository = employeeRepository ?? throw new ArgumentNullException(nameof(employeeRepository));
         }
 
         public string Username { get; set; } // used for session
@@ -49,6 +52,8 @@ namespace AutomatedDispatcher.Pages.Task
         [BindProperty]
         public Data.Task Task { get; set; }
 
+        public IEnumerable<Data.Employee> CandidateProgrammers { get; set; } = new List<Data.Employee>();
+
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
@@ -58,11 +63,16 @@ namespace AutomatedDispatcher.Pages.Task
                 return Page();
             }
 
-            // When a task is created it should not be assigned to anyone
-            Task.EmployeeId = null;
+            // Get the candidate programmers suitable for the task and the best candidate for it
+            CandidateProgrammers = await _employeeRepository.GetProgrammersMinWorkload(-1);
+            var bestCandidate = CandidateProgrammers.Cast<Data.Employee>().First();
 
-            // When a task is created it should have an unassigned status
-            Task.StatusId = 2;
+            // Update data for assigned programmer
+            Task.EmployeeId = bestCandidate.Id;
+            bestCandidate.CurrentWorkload += Task.ExpectedTime;
+
+            // When a task is created it is automatically assigned to it should be "In Progress"
+            Task.StatusId = 3;
 
             // Set StartDate to create time   
             Task.StartDate = DateTime.Now;

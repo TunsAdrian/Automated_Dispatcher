@@ -63,12 +63,13 @@ namespace AutomatedDispatcher.Pages.Task
                 return Page();
             }
 
-            CandidateProgrammers = await _employeeRepository.GetEmployeesMinWorkload();
+            // Get the candidate programmers suitable for the task and the best candidate for it
+            CandidateProgrammers = await _employeeRepository.GetProgrammersMinWorkload(-1);
+            var bestCandidate = CandidateProgrammers.Cast<Data.Employee>().First();
 
-            // When a task is created it should not be assigned to anyone
-            var firstCandidate = CandidateProgrammers.Cast<Data.Employee>().First();
-            Task.EmployeeId = firstCandidate.Id;
-            firstCandidate.CurrentWorkload += Task.ExpectedTime;
+            // Update data for assigned programmer
+            Task.EmployeeId = bestCandidate.Id;
+            bestCandidate.CurrentWorkload += Task.ExpectedTime;
 
             // When a task is created it is automatically assigned to it should be "In Progress"
             Task.StatusId = 3;

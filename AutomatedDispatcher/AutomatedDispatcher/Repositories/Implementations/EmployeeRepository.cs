@@ -1,5 +1,6 @@
 ﻿using AutomatedDispatcher.Data;
 using AutomatedDispatcher.Repositories.Interfaces;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -62,11 +63,17 @@ namespace AutomatedDispatcher.Repositories.Implementations
             await _dbContext.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<Employee>> GetEmployeesMinWorkload()
+        public async Task<IEnumerable<Employee>> GetProgrammersMinWorkload(int employeeId)
         {
-            var minWorkload = _dbContext.Employee.Min(s => s.CurrentWorkload);
+            // Get the minimum workload of the programmers except the one sent as param
+            var minWorkload = _dbContext.Employee
+                .Where(s=> s.Id != employeeId && s.Role == 1)
+                .Min(s => s.CurrentWorkload);
+
+            // Return a list with the programmers that have minimum workload, sorted descending by their working hours
             return await _dbContext.Employee
-                .Where(s => s.CurrentWorkload == minWorkload)
+                .Where(s => s.CurrentWorkload == minWorkload && s.Role == 1)
+                .OrderByDescending(s => s.WorkingHours)
                 .ToListAsync();
         }
     }

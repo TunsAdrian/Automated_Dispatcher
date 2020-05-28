@@ -6,7 +6,7 @@
 }
 
     <div class="container">
-        <h1 class="text-danger">Task will be removed from your workload</h1>
+        <h1 class="text-danger">Urmeaza sa respingeti task-ul curent. Doriti sa continuati?</h1>
         <h4>Task</h4>
         <hr />
         <dl class="row justify-content-center">
@@ -61,7 +61,7 @@
         </dl>
 
         <form method="post">
-            <a class="btn btn-primary text-white" asp-page="../Programmer/menuProgrammer/">Back to List</a>
+            <a class="btn btn-primary text-white" asp-page="../Programmer/menuProgrammer/">Inapoi la meniu</a>
             <a class="btn btn-secondary text-white" asp-page="../Programmer/taskDetailsProgrammer/" asp-route-id="@Model.Task.Id">Cancel</a>
             <input type="submit" value="Confima Respingere Task" class="btn btn-danger text-white" />
         </form>

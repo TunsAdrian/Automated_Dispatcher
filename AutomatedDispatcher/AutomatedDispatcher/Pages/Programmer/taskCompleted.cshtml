@@ -6,7 +6,7 @@
 }
 
     <div class="container">
-        <h1>Task will be marked as completed</h1>
+        <h1>Task-ul va fi marcat drept finalizat.</h1>
         <h4>Task</h4>
         <hr />
         <dl class="row justify-content-center">
@@ -59,8 +59,11 @@
                 @Html.DisplayFor(model => model.Task.Status.Id)
             </dd>
         </dl>
-        <a class="btn btn-primary text-white" asp-page="../Programmer/menuProgrammer/">Back to List</a>
-        <a class="btn btn-secondary text-white" asp-page="../Programmer/taskDetailsProgrammer/" asp-route-id="@Model.Task.Id">Cancel</a>
-        <a class="btn btn-dark text-white">Mark as Completed</a>
+
+        <form method="post">
+            <a class="btn btn-primary text-white" asp-page="../Programmer/menuProgrammer/">Inapoi la meniu</a>
+            <a class="btn btn-secondary text-white" asp-page="../Programmer/taskDetailsProgrammer/" asp-route-id="@Model.Task.Id">Cancel</a>            
+            <input type="submit" value="Marcheaza ca Finalizat" class="btn btn-dark text-white" />
+        </form>
     </div>
 

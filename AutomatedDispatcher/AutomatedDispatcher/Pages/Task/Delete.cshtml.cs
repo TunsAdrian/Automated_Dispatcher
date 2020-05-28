@@ -63,8 +63,12 @@ namespace AutomatedDispatcher.Pages.Task
 
             if (Task != null)
             {
-                Employee = await _employeeRepository.GetEmployeeByIdAsync(Task.EmployeeId.Value);
-                Employee.CurrentWorkload -= Task.ExpectedTime;
+                // If task is "In Progress", update Current Workload
+                if (Task.StatusId == 3)
+                {
+                    Employee = await _employeeRepository.GetEmployeeByIdAsync(Task.EmployeeId.Value);
+                    Employee.CurrentWorkload -= Task.ExpectedTime;
+                }
                 _context.Task.Remove(Task);
                 await _context.SaveChangesAsync();
             }

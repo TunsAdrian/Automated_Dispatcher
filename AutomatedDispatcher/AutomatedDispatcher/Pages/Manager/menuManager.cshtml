@@ -55,7 +55,16 @@
                     {
                         <td></td>
                     }
-                    <td>@task.Employee.FirstName @task.Employee.LastName</td>
+
+                    <!-- If task doesn't have an employee, show nothing.-->
+                    @if( task.Employee != null) 
+                    { 
+                        <td>@task.Employee.FirstName @task.Employee.LastName</td>
+                    }
+                    else
+                    {
+                        <td></td>
+                    }
 
                     <td>
                         <a asp-page="../Task/Edit" asp-route-id="@task.Id">Editeaza</a> |

@@ -42,9 +42,15 @@ namespace AutomatedDispatcher.Pages.Skill
                 return Page();
             }
 
-            _context.Skill.Add(Skill);
-            await _context.SaveChangesAsync();
-
+            try
+            {
+                _context.Skill.Add(Skill);
+                await _context.SaveChangesAsync();
+            }
+            catch
+            {
+                return RedirectToPage("Create");
+            }
             return RedirectToPage("Create");
         }
 

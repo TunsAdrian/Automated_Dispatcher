@@ -45,7 +45,7 @@ namespace AutomatedDispatcher.Pages.Skill
             _context.Skill.Add(Skill);
             await _context.SaveChangesAsync();
 
-            return RedirectToPage("../Manager/menuManager");
+            return RedirectToPage("Create");
         }
 
         public async System.Threading.Tasks.Task OnGetAsync()

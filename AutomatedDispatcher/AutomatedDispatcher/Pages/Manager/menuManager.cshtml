@@ -47,18 +47,15 @@
                     }
                     <td>@task.Priority</td>
                     <td>@task.ExpectedTime</td>
-                    <td>@task.StartDate</td>
-                    <td>@task.EndDate</td>
-
-                    <!-- Check statement to see if the task is assigned to someone or not. If it is, write his/her name, else write nothing-->
-                    @if (task.Employee != null && task.StatusId == 3)
-                    {
-                        <td>@task.Employee.FirstName @task.Employee.LastName</td>
+                    <td>@task.StartDate.ToString("dd-MMMM-yy")</td>
+                    @if (task.EndDate != null) { 
+                        <td>@task.EndDate?.ToString("dd-MMMM-yy")</td>
                     }
                     else
                     {
                         <td></td>
                     }
+                    <td>@task.Employee.FirstName @task.Employee.LastName</td>
 
                     <td>
                         <a asp-page="../Task/Edit" asp-route-id="@task.Id">Editeaza</a> |

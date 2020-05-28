@@ -81,27 +81,6 @@
             <!-- COLOANA 1 -->
             <div class="col-md-3 justify-content-center">
                 <div class="form-group">
-                    <label asp-for="Task.StartDate" class="control-label">Data inceput</label>
-                    <input asp-for="Task.StartDate" class="form-control" readonly/>
-                    <span asp-validation-for="Task.StartDate" class="text-danger"></span>
-                </div>
-            </div>
-
-            <!-- COLOANA 2 -->
-            <div class="col-md-3 justify-content-center">
-                <div class="form-group">
-                    <label asp-for="Task.EndDate" class="control-label">Data final</label>
-                    <input asp-for="Task.EndDate" class="form-control" readonly/>
-                    <span asp-validation-for="Task.EndDate" class="text-danger"></span>
-                </div>
-            </div>
-        </div>
-
-        <!-- RAND 5-->
-        <div class="row justify-content-center">
-            <!-- COLOANA 1 -->
-            <div class="col-md-3 justify-content-center">
-                <div class="form-group">
                     <input type="hidden" asp-for="Task.Id" />
                     <input type="submit" value="Delete" class="btn btn-danger" />
                 </div>

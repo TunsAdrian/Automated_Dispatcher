@@ -21,15 +21,13 @@
                         <span asp-validation-for="Skill.SkillName" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <input type="submit" value="Save" class="btn btn-primary" />
+                        <input type="submit" value="Save" class="btn btn-primary" /> |
+                        <a asp-page="Create">Inapoi</a>
                     </div>
                 </form>
             </div>
         </div>
 
-        <div>
-            <a asp-page="../Manager/menuManager">Inapoi la meniu</a>
-        </div>
     </div>
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

@@ -6,63 +6,84 @@
     Layout = "~/Pages/Shared/_LayoutManager.cshtml";
 }
 
-<h1>Details</h1>
-
-<div>
-    <h4>Task</h4>
+<div class="container">
     <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Task.Name)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Task.Name)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Task.Description)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Task.Description)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Task.Priority)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Task.Priority)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Task.ExpectedTime)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Task.ExpectedTime)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Task.StartDate)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Task.StartDate)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Task.EndDate)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Task.EndDate)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Task.Employee)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Task.Employee.FirstName)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Task.Status)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Task.Status.Id)
-        </dd>
-    </dl>
+        <!-- RAND 1-->
+    <div class="row justify-content-center">
+
+        <!-- COLOANA 1-2 -->
+        <div class="col-md-3 justify-content-center">
+            <img src="~/images/todo_icon.png" alt="" width="140" height="140" align="middle" style="display:block; margin:auto">
+        </div>
+
+        <div class="col-md-3 justify-content-center text-center">
+            <h3 >Detalii taskului:</h3>
+        </div>
+
+    </div>
+
+        <!-- RAND 2-->
+        <div class="row justify-content-center">
+
+            <!-- COLOANA 1-2 -->
+            <div class="col-md-6 justify-content-center">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Task.Name" class="control-label">Nume task</label>
+                    <input asp-for="Task.Name" class="form-control" readonly/>
+                    <span asp-validation-for="Task.Name" class="text-danger"></span>
+                </div>
+            </div>
+
+        </div>
+
+
+        <!-- RAND 3-->
+        <div class="row justify-content-center">
+            <!-- COLOANA 1-->
+            <div class="col-md-3 justify-content-center">
+                <div class="form-group">
+                    <label asp-for="Task.ExpectedTime" class="control-label">Timp estimat (ore)</label>
+                    <input asp-for="Task.ExpectedTime" class="form-control" readonly/>
+                    <span asp-validation-for="Task.ExpectedTime" class="text-danger"></span>
+                </div>
+            </div>
+            <!-- COLOANA 2-->
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label asp-for="Task.Priority" class="control-label">Prioritatea (min 10 - 1 max)</label>
+                    <input asp-for="Task.Priority" class="form-control" readonly/>
+                    <span asp-validation-for="Task.Priority" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- RAND 4-->
+        <div class="row justify-content-center">
+            <!-- COLOANA 1-2 deorece descrierea este mai lunga-->
+            <div class="col-md-6 justify-content-center">
+                <div class="form-group">
+                    <label asp-for="Task.Description" class="control-label">Descriere</label>
+                    <textarea rows="3" asp-for="Task.Description" class="form-control" readonly></textarea>
+                    <span asp-validation-for="Task.Description" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- RAND 5-->
+        <div class="row justify-content-center">
+            <!-- COLOANA 1-2 d-->
+            <div class="col-md-3 justify-content-center">
+                <div class="form-group">
+                    <a asp-page="./Edit" asp-route-id="@Model.Task.Id">Edit</a> 
+                </div>
+            </div>
+            <!-- COLOANA 2-->
+            <div class="col-md-3 justify-content-center">
+                <div>
+                    <a asp-page="../Manager/menuManager">Back to List</a>
+                </div>
+            </div>
+        </div>
 </div>
-<div>
-    <a asp-page="./Edit" asp-route-id="@Model.Task.Id">Edit</a> |
-    <a asp-page="../Manager/menuManager">Back to List</a>
-</div>
+

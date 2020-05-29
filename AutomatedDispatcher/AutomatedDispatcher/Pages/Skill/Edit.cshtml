@@ -8,7 +8,7 @@
 
 
     <div class="container">
-        <h4>Skill</h4>
+        <h4>Nume Skill</h4>
         <hr />
         <div class="row">
             <div class="col-md-4">
@@ -16,7 +16,7 @@
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <input type="hidden" asp-for="Skill.Id" />
                     <div class="form-group">
-                        <label asp-for="Skill.SkillName" class="control-label"></label>
+                        @*<label asp-for="Skill.SkillName" class="control-label">Nume Skill</label>*@
                         <input asp-for="Skill.SkillName" class="form-control" />
                         <span asp-validation-for="Skill.SkillName" class="text-danger"></span>
                     </div>

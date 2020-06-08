@@ -1,0 +1,291 @@
+#0
+CREATE SCHEMA task_assignment
+
+#1
+
+USE [webapp]
+GO
+
+/****** Object:  Table [task_assignment].[employee]    Script Date: 6/4/2020 12:41:30 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [task_assignment].[employee](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[First_Name] [nvarchar](50) NOT NULL,
+	[Last_Name] [nvarchar](50) NOT NULL,
+	[Role] [smallint] NOT NULL,
+	[Username] [nvarchar](50) NOT NULL,
+	[Password] [nvarchar](50) NOT NULL,
+	[Working_Hours] [int] NOT NULL,
+	[Current_Workload] [int] NULL,
+ CONSTRAINT [PK_employees_ID] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [task_assignment].[employee] ADD  DEFAULT (NULL) FOR [Current_Workload]
+GO
+
+EXEC sys.sp_addextendedproperty @name=N'MS_SSMA_SOURCE', @value=N'task_assignment.employees' , @level0type=N'SCHEMA',@level0name=N'task_assignment', @level1type=N'TABLE',@level1name=N'employee'
+GO
+
+#2
+
+USE [webapp]
+GO
+
+/****** Object:  Table [task_assignment].[skill]    Script Date: 6/4/2020 12:45:10 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [task_assignment].[skill](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[Skill_Name] [nvarchar](50) NOT NULL,
+ CONSTRAINT [PK_skills_ID] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY],
+UNIQUE NONCLUSTERED 
+(
+	[Skill_Name] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+EXEC sys.sp_addextendedproperty @name=N'MS_SSMA_SOURCE', @value=N'task_assignment.skills' , @level0type=N'SCHEMA',@level0name=N'task_assignment', @level1type=N'TABLE',@level1name=N'skill'
+GO
+
+#3
+
+USE [webapp]
+GO
+
+/****** Object:  Table [task_assignment].[employee_skill]    Script Date: 6/4/2020 12:50:16 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [task_assignment].[employee_skill](
+	[EmployeeID] [int] NOT NULL,
+	[SkillID] [int] NOT NULL,
+	[Skill_Level] [int] NOT NULL,
+ CONSTRAINT [PK_employee_skill_EmployeeID] PRIMARY KEY CLUSTERED 
+(
+	[EmployeeID] ASC,
+	[SkillID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [task_assignment].[employee_skill]  WITH NOCHECK ADD  CONSTRAINT [employee_skill$EmployeeID] FOREIGN KEY([EmployeeID])
+REFERENCES [task_assignment].[employee] ([ID])
+ON DELETE CASCADE
+GO
+
+ALTER TABLE [task_assignment].[employee_skill] CHECK CONSTRAINT [employee_skill$EmployeeID]
+GO
+
+ALTER TABLE [task_assignment].[employee_skill]  WITH NOCHECK ADD  CONSTRAINT [employee_skill$SkillID] FOREIGN KEY([SkillID])
+REFERENCES [task_assignment].[skill] ([ID])
+ON DELETE CASCADE
+GO
+
+ALTER TABLE [task_assignment].[employee_skill] CHECK CONSTRAINT [employee_skill$SkillID]
+GO
+
+EXEC sys.sp_addextendedproperty @name=N'MS_SSMA_SOURCE', @value=N'task_assignment.employee_skill' , @level0type=N'SCHEMA',@level0name=N'task_assignment', @level1type=N'TABLE',@level1name=N'employee_skill'
+GO
+
+#4
+
+USE [webapp]
+GO
+
+/****** Object:  Table [task_assignment].[status]    Script Date: 6/4/2020 1:08:10 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [task_assignment].[status](
+	[ID] [int] NOT NULL,
+	[Status] [nvarchar](20) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+#5
+
+USE [webapp]
+GO
+
+/****** Object:  Table [task_assignment].[task]    Script Date: 6/4/2020 12:55:24 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [task_assignment].[task](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[EmployeeID] [int] NULL,
+	[Name] [nvarchar](50) NOT NULL,
+	[StatusID] [int] NULL,
+	[Description] [nvarchar](max) NOT NULL,
+	[Priority] [int] NOT NULL,
+	[Expected_Time] [int] NOT NULL,
+	[Start_Date] [nvarchar](50) NOT NULL,
+	[End_Date] [nvarchar](50) NULL,
+ CONSTRAINT [PK_tasks_ID] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+
+ALTER TABLE [task_assignment].[task] ADD  DEFAULT (NULL) FOR [EmployeeID]
+GO
+
+ALTER TABLE [task_assignment].[task] ADD  DEFAULT (NULL) FOR [End_Date]
+GO
+
+ALTER TABLE [task_assignment].[task]  WITH CHECK ADD FOREIGN KEY([StatusID])
+REFERENCES [task_assignment].[status] ([ID])
+GO
+
+ALTER TABLE [task_assignment].[task]  WITH NOCHECK ADD  CONSTRAINT [tasks$EmployeeID_Task] FOREIGN KEY([EmployeeID])
+REFERENCES [task_assignment].[employee] ([ID])
+ON DELETE CASCADE
+GO
+
+ALTER TABLE [task_assignment].[task] CHECK CONSTRAINT [tasks$EmployeeID_Task]
+GO
+
+EXEC sys.sp_addextendedproperty @name=N'MS_SSMA_SOURCE', @value=N'task_assignment.tasks' , @level0type=N'SCHEMA',@level0name=N'task_assignment', @level1type=N'TABLE',@level1name=N'task'
+GO
+
+#6
+
+USE [webapp]
+GO
+
+/****** Object:  Table [task_assignment].[task_skill]    Script Date: 6/4/2020 1:04:36 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [task_assignment].[task_skill](
+	[TaskID] [int] NOT NULL,
+	[SkillID] [int] NOT NULL,
+	[Min_Required_Level] [int] NOT NULL,
+ CONSTRAINT [PK_task_skill_TaskID] PRIMARY KEY CLUSTERED 
+(
+	[TaskID] ASC,
+	[SkillID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [task_assignment].[task_skill]  WITH NOCHECK ADD  CONSTRAINT [task_skill$SkillID_Task] FOREIGN KEY([SkillID])
+REFERENCES [task_assignment].[skill] ([ID])
+ON DELETE CASCADE
+GO
+
+ALTER TABLE [task_assignment].[task_skill] CHECK CONSTRAINT [task_skill$SkillID_Task]
+GO
+
+ALTER TABLE [task_assignment].[task_skill]  WITH NOCHECK ADD  CONSTRAINT [task_skill$TaskID] FOREIGN KEY([TaskID])
+REFERENCES [task_assignment].[task] ([ID])
+ON DELETE CASCADE
+GO
+
+ALTER TABLE [task_assignment].[task_skill] CHECK CONSTRAINT [task_skill$TaskID]
+GO
+
+EXEC sys.sp_addextendedproperty @name=N'MS_SSMA_SOURCE', @value=N'task_assignment.task_skill' , @level0type=N'SCHEMA',@level0name=N'task_assignment', @level1type=N'TABLE',@level1name=N'task_skill'
+GO
+
+
+
+
+# insert employee
+
+USE [webapp]
+GO
+
+INSERT INTO [task_assignment].[employee]
+           ([First_Name]
+           ,[Last_Name]
+           ,[Role]
+           ,[Username]
+           ,[Password]
+           ,[Working_Hours]
+           ,[Current_Workload])
+     VALUES
+           ('Jon',
+		   'Jonescu',
+		   0,
+		   'jon.jonescu99@e-uvt.ro',
+			'jj',
+			8,
+			0)
+GO
+
+#create statuses
+
+USE [webapp]
+GO
+
+INSERT INTO [task_assignment].[status]
+           ([ID]
+           ,[Status])
+     VALUES
+           (3
+           ,'In Progress')
+GO
+
+
+USE [webapp]
+GO
+
+INSERT INTO [task_assignment].[status]
+           ([ID]
+           ,[Status])
+     VALUES
+           (2
+           ,'Unassigned')
+GO
+
+
+USE [webapp]
+GO
+
+INSERT INTO [task_assignment].[status]
+           ([ID]
+           ,[Status])
+     VALUES
+           (1
+           ,'Completed')
+GO
+
+#scaffold part
+
+Scaffold-DbContext "Server=Server-Name;Database=webapp;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer -f -OutputDir Data
+

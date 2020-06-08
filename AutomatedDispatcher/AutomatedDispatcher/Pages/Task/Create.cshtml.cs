@@ -75,7 +75,7 @@ namespace AutomatedDispatcher.Pages.Task
             Task.StatusId = 3;
 
             // Set StartDate to create time   
-            Task.StartDate = DateTime.Now;
+            Task.StartDate = DateTime.Now.ToString("dd-MMMM-yy HH:mm");
 
             // If not description set default
             if (Task.Description == null) Task.Description = "-";

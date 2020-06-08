@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace AutomatedDispatcher.Data
@@ -12,8 +13,8 @@ namespace AutomatedDispatcher.Data
         }
 
         public int Id { get; set; }
+
         [Required]
-        
         public string SkillName { get; set; }
 
         public virtual ICollection<EmployeeSkill> EmployeeSkill { get; set; }

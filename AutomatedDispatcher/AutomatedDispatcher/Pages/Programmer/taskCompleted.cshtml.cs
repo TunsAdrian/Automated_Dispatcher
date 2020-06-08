@@ -75,7 +75,7 @@ namespace AutomatedDispatcher.Pages.Programmer
                 Employee.CurrentWorkload -= Task.ExpectedTime;
 
                 // Put end date to current time for task
-                Task.EndDate = DateTime.Now;
+                Task.EndDate = DateTime.Now.ToString("dd-MMMM-yy HH:mm");
 
                 // Change status to "Completed"
                 Task.StatusId = 1;

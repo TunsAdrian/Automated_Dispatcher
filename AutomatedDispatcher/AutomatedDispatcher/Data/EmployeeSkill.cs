@@ -1,4 +1,7 @@
-﻿namespace AutomatedDispatcher.Data
+﻿using System;
+using System.Collections.Generic;
+
+namespace AutomatedDispatcher.Data
 {
     public partial class EmployeeSkill
     {

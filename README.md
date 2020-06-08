@@ -8,7 +8,7 @@ The scope of the application is to automatically dispatch tasks created by one o
 
 ### SQL Server
 
-The application uses SQL Server for database management. Microsoft SQL Server Management Studio must be installed and then a new database should be created. The scripts from Scripts_SQL_Server.txt file must be run in order, from 0 to 6 and then at least one manager and the three statuses have to be created.
+The application uses SQL Server for database management. Microsoft SQL Server Management Studio must be installed and then a new database should be created. The scripts from [Scripts_SQL_Server.txt](Scripts_SQL_Server.txt) file must be run in order, from 0 to 6 and then at least one manager and the three statuses have to be created.
 
 ### ASP.NET Core Visual Studio
 

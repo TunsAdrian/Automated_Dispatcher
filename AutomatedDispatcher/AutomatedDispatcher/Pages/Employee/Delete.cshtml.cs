@@ -40,7 +40,8 @@ namespace AutomatedDispatcher.Pages.Employee
                 }
                 return Page();
 
-            } else
+            }
+            else
             {
                 return RedirectToPage("../Index");
             }

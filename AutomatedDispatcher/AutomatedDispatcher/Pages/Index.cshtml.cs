@@ -1,12 +1,10 @@
-using System;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
 using AutomatedDispatcher.Data;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-
 using Microsoft.Extensions.Logging;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
 
 namespace AutomatedDispatcher.Pages
 {
@@ -29,7 +27,7 @@ namespace AutomatedDispatcher.Pages
 
         public void OnGet()
         {
-            
+
         }
 
         public IActionResult OnPost()
@@ -39,7 +37,7 @@ namespace AutomatedDispatcher.Pages
 
             var login = from employee in context.Employee
                         where employee.Username.Equals(username) == true && employee.Password.Equals(password) == true
-                        select employee; 
+                        select employee;
 
             if (ModelState.IsValid == false)
             {

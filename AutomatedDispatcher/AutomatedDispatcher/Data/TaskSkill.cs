@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace AutomatedDispatcher.Data
+﻿namespace AutomatedDispatcher.Data
 {
     public partial class TaskSkill
     {

@@ -61,7 +61,7 @@ namespace AutomatedDispatcher.Pages.Skill
             {
                 // Get skill list
                 SkillList = await _context.Skill.ToListAsync();
-            } 
+            }
         }
 
         public IActionResult OnGetLogout()

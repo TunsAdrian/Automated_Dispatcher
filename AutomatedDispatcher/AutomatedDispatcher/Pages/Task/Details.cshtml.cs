@@ -40,7 +40,8 @@ namespace AutomatedDispatcher.Pages.Task
                     return NotFound();
                 }
                 return Page();
-            } else
+            }
+            else
             {
                 return RedirectToPage("../Index");
             }

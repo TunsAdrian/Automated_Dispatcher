@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace AutomatedDispatcher.Pages.Task
 {
-    public class CreateModel : PageModel 
+    public class CreateModel : PageModel
     {
         private readonly AutomatedDispatcher.Data.webappContext _context;
         private readonly ITaskRepository _taskRepository;

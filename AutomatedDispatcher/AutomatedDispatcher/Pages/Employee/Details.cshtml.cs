@@ -38,7 +38,8 @@ namespace AutomatedDispatcher.Pages.Employee
                     return NotFound();
                 }
                 return Page();
-            } else
+            }
+            else
             {
                 return RedirectToPage("../Index");
             }

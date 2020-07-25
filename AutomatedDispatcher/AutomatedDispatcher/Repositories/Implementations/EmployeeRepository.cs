@@ -1,6 +1,5 @@
 ﻿using AutomatedDispatcher.Data;
 using AutomatedDispatcher.Repositories.Interfaces;
-using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -67,7 +66,7 @@ namespace AutomatedDispatcher.Repositories.Implementations
         {
             // Get the minimum workload of the programmers except the one sent as param
             var minWorkload = _dbContext.Employee
-                .Where(s=> s.Id != employeeId && s.Role == 1)
+                .Where(s => s.Id != employeeId && s.Role == 1)
                 .Min(s => s.CurrentWorkload);
 
             // Return a list with the programmers that have minimum workload, sorted descending by their working hours

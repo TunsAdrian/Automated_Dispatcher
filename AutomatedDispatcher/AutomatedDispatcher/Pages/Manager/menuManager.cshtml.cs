@@ -28,9 +28,9 @@ namespace AutomatedDispatcher.Pages.Manager
         {
             Username = HttpContext.Session.GetString("username"); // establish session
 
-            if (Username != null) 
+            if (Username != null)
             {
-               
+
                 TaskList = await _taskRepository.GetTaskListAsync();
                 EmployeeList = await _employeeRepository.GetProgrammersListAsync();
                 return Page();
@@ -40,7 +40,7 @@ namespace AutomatedDispatcher.Pages.Manager
             {
                 return RedirectToPage("../Index");
             }
-           
+
         }
 
         public IActionResult OnGetLogout()

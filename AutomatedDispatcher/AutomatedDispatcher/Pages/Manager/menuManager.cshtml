@@ -47,9 +47,9 @@
                     }
                     <td>@task.Priority</td>
                     <td>@task.ExpectedTime</td>
-                    <td>@task.StartDate.ToString("dd-MMMM-yy")</td>
+                    <td>@task.StartDate</td>
                     @if (task.EndDate != null) { 
-                        <td>@task.EndDate?.ToString("dd-MMMM-yy")</td>
+                        <td>@task.EndDate</td>
                     }
                     else
                     {

@@ -28,12 +28,8 @@ namespace AutomatedDispatcher.Data
         {
             if (!optionsBuilder.IsConfigured)
             {
-                // TODO: keep in mind that maybe this will be needed in the future
-                optionsBuilder.UseSqlServer("Server=idostuff.xyz,1422;Database=webapp;user id=webappAdmin;password=ChangeM3Now!234;");
-
-
-                // Connection strings for local databases
-                //optionsBuilder.UseSqlServer("Server=LAPTOP-ADI,1433;Database=Dispatcher;Trusted_Connection=True;""); // Adi
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
+                optionsBuilder.UseSqlServer("Server=LAPTOP-ADI;Database=webapp;Trusted_Connection=True;");
             }
         }
 
@@ -75,9 +71,6 @@ namespace AutomatedDispatcher.Data
 
                 entity.ToTable("employee_skill", "task_assignment");
 
-                entity.HasIndex(e => e.SkillId)
-                    .HasName("SkillID_idx");
-
                 entity.Property(e => e.EmployeeId).HasColumnName("EmployeeID");
 
                 entity.Property(e => e.SkillId).HasColumnName("SkillID");
@@ -99,6 +92,10 @@ namespace AutomatedDispatcher.Data
             {
                 entity.ToTable("skill", "task_assignment");
 
+                entity.HasIndex(e => e.SkillName)
+                    .HasName("UQ__skill__8100EB550E87E3CC")
+                    .IsUnique();
+
                 entity.Property(e => e.Id).HasColumnName("ID");
 
                 entity.Property(e => e.SkillName)
@@ -117,15 +114,12 @@ namespace AutomatedDispatcher.Data
 
                 entity.Property(e => e.Status1)
                     .HasColumnName("Status")
-                    .HasMaxLength(10);
+                    .HasMaxLength(20);
             });
 
             modelBuilder.Entity<Task>(entity =>
             {
                 entity.ToTable("task", "task_assignment");
-
-                entity.HasIndex(e => e.EmployeeId)
-                    .HasName("EmployeeID_idx");
 
                 entity.Property(e => e.Id).HasColumnName("ID");
 
@@ -135,7 +129,7 @@ namespace AutomatedDispatcher.Data
 
                 entity.Property(e => e.EndDate)
                     .HasColumnName("End_Date")
-                    .HasColumnType("date");
+                    .HasMaxLength(50);
 
                 entity.Property(e => e.ExpectedTime).HasColumnName("Expected_Time");
 
@@ -144,8 +138,9 @@ namespace AutomatedDispatcher.Data
                     .HasMaxLength(50);
 
                 entity.Property(e => e.StartDate)
+                    .IsRequired()
                     .HasColumnName("Start_Date")
-                    .HasColumnType("date");
+                    .HasMaxLength(50);
 
                 entity.Property(e => e.StatusId).HasColumnName("StatusID");
 
@@ -158,7 +153,7 @@ namespace AutomatedDispatcher.Data
                 entity.HasOne(d => d.Status)
                     .WithMany(p => p.Task)
                     .HasForeignKey(d => d.StatusId)
-                    .HasConstraintName("FK__tasks__StatusID__72C60C4A");
+                    .HasConstraintName("FK__task__StatusID__31EC6D26");
             });
 
             modelBuilder.Entity<TaskSkill>(entity =>
@@ -167,9 +162,6 @@ namespace AutomatedDispatcher.Data
                     .HasName("PK_task_skill_TaskID");
 
                 entity.ToTable("task_skill", "task_assignment");
-
-                entity.HasIndex(e => e.SkillId)
-                    .HasName("SkillID_Task_idx");
 
                 entity.Property(e => e.TaskId).HasColumnName("TaskID");
 

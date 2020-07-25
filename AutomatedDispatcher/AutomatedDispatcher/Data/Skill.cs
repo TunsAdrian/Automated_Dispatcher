@@ -12,8 +12,8 @@ namespace AutomatedDispatcher.Data
         }
 
         public int Id { get; set; }
+
         [Required]
-        
         public string SkillName { get; set; }
 
         public virtual ICollection<EmployeeSkill> EmployeeSkill { get; set; }

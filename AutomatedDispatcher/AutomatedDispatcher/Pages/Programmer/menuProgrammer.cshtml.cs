@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
-using AutomatedDispatcher.Repositories.Interfaces;
+﻿using AutomatedDispatcher.Repositories.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Threading.Tasks;
 
 namespace AutomatedDispatcher.Pages.Programmer
 {
@@ -20,7 +19,7 @@ namespace AutomatedDispatcher.Pages.Programmer
         public menuProgrammerModel(ITaskRepository taskRepository)
         {
             _taskRepository = taskRepository ?? throw new ArgumentNullException(nameof(taskRepository));
-  
+
         }
         public IEnumerable<Data.Task> TaskList { get; set; } = new List<Data.Task>();
         public async Task<IActionResult> OnGetAsync()
@@ -34,11 +33,12 @@ namespace AutomatedDispatcher.Pages.Programmer
             {
                 TaskList = await _taskRepository.GetTaskListByIdAsync(id);
                 return Page();
-            } else
+            }
+            else
 
             {
                 return RedirectToPage("../Index");
-            }            
+            }
         }
 
         public IActionResult OnGetLogout()

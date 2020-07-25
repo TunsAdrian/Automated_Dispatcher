@@ -40,7 +40,8 @@ namespace AutomatedDispatcher.Pages.Skill
                     return NotFound();
                 }
                 return Page();
-            } else
+            }
+            else
             {
                 return RedirectToPage("../Index");
             }

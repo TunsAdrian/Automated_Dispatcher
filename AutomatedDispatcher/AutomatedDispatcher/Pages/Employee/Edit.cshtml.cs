@@ -1,11 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutomatedDispatcher.Repositories.Interfaces;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using AutomatedDispatcher.Repositories.Interfaces;
-using System;
 
 namespace AutomatedDispatcher.Pages.Employee
 {
@@ -43,7 +43,8 @@ namespace AutomatedDispatcher.Pages.Employee
                     return NotFound();
                 }
                 return Page();
-            } else
+            }
+            else
             {
                 return RedirectToPage("../Index");
             }

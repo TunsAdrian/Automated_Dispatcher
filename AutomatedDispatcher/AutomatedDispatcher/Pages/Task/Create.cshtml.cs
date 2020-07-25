@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace AutomatedDispatcher.Pages.Task
 {
-    public class CreateModel : PageModel 
+    public class CreateModel : PageModel
     {
         private readonly AutomatedDispatcher.Data.webappContext _context;
         private readonly ITaskRepository _taskRepository;
@@ -75,7 +75,7 @@ namespace AutomatedDispatcher.Pages.Task
             Task.StatusId = 3;
 
             // Set StartDate to create time   
-            Task.StartDate = DateTime.Now;
+            Task.StartDate = DateTime.Now.ToString("dd-MMMM-yy HH:mm");
 
             // If not description set default
             if (Task.Description == null) Task.Description = "-";

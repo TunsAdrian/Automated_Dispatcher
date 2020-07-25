@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using AutomatedDispatcher.Repositories.Interfaces;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
-using AutomatedDispatcher.Repositories.Interfaces;
+using System;
+using System.Threading.Tasks;
 
 namespace AutomatedDispatcher.Pages.Programmer
 {
@@ -75,7 +73,7 @@ namespace AutomatedDispatcher.Pages.Programmer
                 Employee.CurrentWorkload -= Task.ExpectedTime;
 
                 // Put end date to current time for task
-                Task.EndDate = DateTime.Now;
+                Task.EndDate = DateTime.Now.ToString("dd-MMMM-yy HH:mm");
 
                 // Change status to "Completed"
                 Task.StatusId = 1;

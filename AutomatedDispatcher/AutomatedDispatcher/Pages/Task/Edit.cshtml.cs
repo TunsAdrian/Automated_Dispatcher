@@ -56,7 +56,8 @@ namespace AutomatedDispatcher.Pages.Task
                 ViewData["EmployeeId"] = new SelectList(_context.Employee, "Id", "FirstName");
                 //ViewData["StatusId"] = new SelectList(_context.Status, "Id", "Id");
                 return Page();
-            } else
+            }
+            else
             {
                 return RedirectToPage("../Index");
             }
@@ -77,7 +78,7 @@ namespace AutomatedDispatcher.Pages.Task
             {
                 //await _context.SaveChangesAsync();
                 await _taskRepository.UpdateAsync(Task);
-                
+
             }
             catch (DbUpdateConcurrencyException)
             {

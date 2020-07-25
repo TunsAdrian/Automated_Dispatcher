@@ -51,7 +51,8 @@ namespace AutomatedDispatcher.Pages.Task
                 employeeFullName = Employee.FirstName + " " + Employee.LastName;
                 return Page();
 
-            } else
+            }
+            else
             {
                 return RedirectToPage("../Index");
             }
